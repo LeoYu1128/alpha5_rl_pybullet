@@ -1,0 +1,320 @@
+<?xml version="1.0"?>
+<robot name="alpha_robot">
+  
+  <!-- 添加世界链接 -->
+  <link name="world"/>
+  
+  <!-- 材质定义 -->
+  <material name="alpha_black">
+    <color rgba="0.3 0.3 0.3 1"/>
+  </material>
+  
+  <material name="alpha_ee_black">
+    <color rgba="0.3 0.3 0.3 1"/>
+  </material>
+  
+  <material name="alpha_standard_jaws_black">
+    <color rgba="0.3 0.3 0.3 1"/>
+  </material>
+  
+  <!-- 基座链接 - 添加惯性数据 -->
+  <link name="alpha_base_link">
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+  
+  <!-- 世界到基座的固定关节 -->
+  <joint name="alpha_base_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="world"/>
+    <child link="alpha_base_link"/>
+  </joint>
+  
+  <!-- M3 Inline 链接 -->
+  <link name="alpha_m3_inline_link">
+    <visual>
+      <geometry>
+        <mesh filename="meshes/M3-INLINE.stl"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="alpha_black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.150" radius="0.020"/>
+      </geometry>
+      <origin rpy="0 1.57075 0" xyz="-0.075 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="0.341"/>
+      <origin xyz="-0.075 -0.006 -0.003"/>
+      <inertia ixx="0.000099" ixy="0.000139" ixz="0.000115" 
+               iyx="0.000139" iyy="0.00292" iyz="0.000003" 
+               izx="0.000115" izy="0.000003" izz="0.002934"/>
+    </inertial>
+  </link>
+  
+  <joint name="alpha_base_link_joint" type="fixed">
+    <parent link="alpha_base_link"/>
+    <child link="alpha_m3_inline_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+  
+  <!-- M2-1-1 链接 -->
+  <link name="alpha_m2_1_1_link">
+    <visual>
+      <geometry>
+        <mesh filename="meshes/M2-1-1.stl"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="alpha_black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.066" radius="0.020"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.000"/>
+    </collision>
+    <inertial>
+      <mass value="0.194"/>
+      <origin xyz="0.005 -0.001 0.016"/>
+      <inertia ixx="0.000189" ixy="0.000005" ixz="0.000054" 
+               iyx="0.000005" iyy="0.000213" iyz="0.000003" 
+               izx="0.000054" izy="0.000003" izz="0.000067"/>
+    </inertial>
+  </link>
+  
+  <joint name="alpha_axis_e" type="revolute">
+    <parent link="alpha_m3_inline_link"/>
+    <child link="alpha_m2_1_1_link"/>
+    <origin xyz="0 0 0.014"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="9.0" lower="0.0" upper="6.10" velocity="0.5"/>
+  </joint>
+  
+  <!-- M2 Joint 链接 -->
+  <link name="alpha_m2_joint_link">
+    <visual>
+      <geometry>
+        <mesh filename="meshes/M2.stl"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="alpha_black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.145" radius="0.020"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="-0.02 0 -0.0725"/>
+    </collision>
+    <collision>
+      <geometry>
+        <cylinder length="0.040" radius="0.020"/>
+      </geometry>
+      <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+    </collision>
+    <collision>
+      <geometry>
+        <cylinder length="0.040" radius="0.020"/>
+      </geometry>
+      <origin rpy="1.5707 0 0" xyz="-0.040 0 -0.1453"/>
+    </collision>
+    <inertial>
+      <mass value="0.429"/>
+      <origin xyz="0.073 0.0 0.0"/>
+      <inertia ixx="0.000087" ixy="-0.000076" ixz="-0.00001" 
+               iyx="-0.000076" iyy="0.00319" iyz="0" 
+               izx="-0.00001" izy="0" izz="0.003212"/>
+    </inertial>
+  </link>
+  
+  <joint name="alpha_axis_d" type="revolute">
+    <parent link="alpha_m2_1_1_link"/>
+    <child link="alpha_m2_joint_link"/>
+    <origin xyz="-0.02 0 0.033"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="9.0" lower="0.0" upper="3.49" velocity="0.5"/>
+  </joint>
+  
+  <!-- M2-1-2 链接 -->
+  <link name="alpha_m2_1_2_link">
+    <visual>
+      <geometry>
+        <mesh filename="meshes/M2-1-3.stl"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="alpha_black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.033" radius="0.020"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.02 0 0.0165"/>
+    </collision>
+    <inertial>
+      <mass value="0.115"/>
+      <origin xyz="0.017 -0.026 -0.002"/>
+      <inertia ixx="0.00012" ixy="-0.000061" ixz="-0.000001" 
+               iyx="-0.000061" iyy="0.000062" iyz="0" 
+               izx="-0.000001" izy="0" izz="0.000156"/>
+    </inertial>
+  </link>
+  
+  <joint name="alpha_axis_c" type="revolute">
+    <parent link="alpha_m2_joint_link"/>
+    <child link="alpha_m2_1_2_link"/>
+    <origin rpy="0 0 3.14159" xyz="-0.04 0 -0.1453"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="9.0" lower="0.0" upper="3.22" velocity="0.5"/>
+  </joint>
+  
+  <!-- M1 链接 -->
+  <link name="alpha_m1_link">
+    <visual>
+      <geometry>
+        <mesh filename="meshes/RS1-100-101-123.stl"/>
+      </geometry>
+      <origin rpy="0 -1.5707 0" xyz="0 0 0"/>
+      <material name="alpha_black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.10975" radius="0.020"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.00 0 0.054875"/>
+    </collision>
+    <inertial>
+      <mass value="0.333"/>
+      <origin xyz="0.0 0.003 -0.098"/>
+      <inertia ixx="0.003709" ixy="0.000002" ixz="-0.000004" 
+               iyx="0.000002" iyy="0.003734" iyz="0" 
+               izx="-0.000004" izy="0" izz="0.000079"/>
+    </inertial>
+  </link>
+  
+  <joint name="alpha_axis_b" type="revolute">
+    <parent link="alpha_m2_1_2_link"/>
+    <child link="alpha_m1_link"/>
+    <origin rpy="0 0 2.09439" xyz="0.02 0 0.033"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="9.0" lower="0.0" upper="3.22" velocity="0.5"/>
+  </joint>
+  
+  <!-- 末端执行器基座 -->
+  <link name="alpha_ee_base_link">
+    <inertial>
+      <mass value="0.001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+  
+  <joint name="alpha_ee_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.09975"/>
+    <parent link="alpha_m1_link"/>
+    <child link="alpha_ee_base_link"/>
+  </joint>
+  
+  <!-- 推杆 -->
+  <link name="alpha_push_rod">
+    <inertial>
+      <mass value="0.001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+  
+  <joint name="alpha_axis_a" type="prismatic">
+    <origin rpy="0 0 0" xyz="0 0 0.009"/>
+    <parent link="alpha_ee_base_link"/>
+    <child link="alpha_push_rod"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" lower="0" upper="0.015" velocity="10"/>
+  </joint>
+  
+  <!-- 标准夹爪基座 -->
+  <link name="alpha_standard_jaws_base_link">
+    <visual>
+      <geometry>
+        <mesh filename="meshes/end_effectors/RS1-124.stl"/>
+      </geometry>
+      <material name="alpha_standard_jaws_black"/>
+    </visual>
+    <inertial>
+      <mass value="0.001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+  
+  <joint name="alpha_standard_jaws_base_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="alpha_ee_base_link"/>
+    <child link="alpha_standard_jaws_base_link"/>
+  </joint>
+  
+  <!-- 夹爪 130 -->
+  <link name="alpha_standard_jaws_rs1_130_link">
+    <visual>
+      <geometry>
+        <mesh filename="meshes/end_effectors/RS1-130.stl"/>
+      </geometry>
+      <material name="alpha_standard_jaws_black"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.012 0.03 0.09"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.0 -0.008 0.045"/>
+    </collision>
+    <inertial>
+      <mass value="0.001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+  
+  <joint name="alpha_standard_jaws_rs1_130_joint" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0.0155 0.0069"/>
+    <parent link="alpha_standard_jaws_base_link"/>
+    <child link="alpha_standard_jaws_rs1_130_link"/>
+    <axis xyz="-1 0 0"/>
+    <limit effort="10" lower="0" upper="0.5" velocity="10"/>
+    <mimic joint="alpha_axis_a" multiplier="51" offset="0"/>
+  </joint>
+  
+  <!-- 夹爪 139 -->
+  <link name="alpha_standard_jaws_rs1_139_link">
+    <visual>
+      <geometry>
+        <mesh filename="meshes/end_effectors/RS1-139.stl"/>
+      </geometry>
+      <material name="alpha_standard_jaws_black"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.012 0.03 0.09"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.0 0.008 0.045"/>
+    </collision>
+    <inertial>
+      <mass value="0.001"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+  
+  <joint name="alpha_standard_jaws_rs1_139_joint" type="revolute">
+    <origin rpy="0 0 0" xyz="0 -0.0155 0.0069"/>
+    <parent link="alpha_standard_jaws_base_link"/>
+    <child link="alpha_standard_jaws_rs1_139_link"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="10" lower="0" upper="0.5" velocity="10"/>
+    <mimic joint="alpha_standard_jaws_rs1_130_joint" multiplier="1" offset="0"/>
+  </joint>
+</robot>

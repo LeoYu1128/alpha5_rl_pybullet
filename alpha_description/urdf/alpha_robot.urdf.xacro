@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="alpha_robot">
+  <xacro:include filename="alpha.urdf.xacro"/>
+  <xacro:include filename="end_effectors/standard_jaws.urdf.xacro"/>
+  <xacro:alpha_urdf parent="world" prefix="alpha_">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:alpha_urdf>
+</robot>
+

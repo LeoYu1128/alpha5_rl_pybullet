@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<robot name="alpha_robot" xmlns:xacro="http://ros.org/wiki/xacro">
+  <link name="world"/>
+  <xacro:include filename="alpha.urdf.xacro"/>
+  <xacro:alpha_urdf parent="world" prefix="alpha_"/>
+</robot>
