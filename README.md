@@ -17,11 +17,11 @@ Try to find a proper reward function.
 
 Here's the flow:
 
-- **PyBullet**: A lightweight physics simulator that provides the base for dynamics, collisions, buoyancy, etc.
+- **PyBullet**: A lightweight physics simulator that provides core rigid body dynamics, joint control, and collision detection.
 - **Gymnasium**: A modern, well-maintained interface for reinforcement learning environments. It wraps PyBullet environments using the standard `reset()` and `step()` methods.
 - **Stable-Baselines3**: A collection of reliable and scalable RL algorithms like PPO, SAC, TD3 — used to train your agent.
 
-In this project, you write your own custom Gymnasium environment using PyBullet as the backend. Then you plug it directly into SB3 and start training!
+You write your own custom Gymnasium environment using PyBullet as the backend. Then you plug it directly into SB3 and start training!
 
 ### 🧪 Quickstart Training (TL;DR)
 
