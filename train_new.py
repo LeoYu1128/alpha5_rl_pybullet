@@ -61,7 +61,7 @@ def make_env(render_mode=None):
 
 
 def train_single_algorithm(algorithm_name, total_timesteps=100000, 
-                          n_envs=4, save_dir="results", render=False):
+                          n_envs=1, save_dir="results", render=False):
     """训练单个算法"""
     
     # 创建保存目录
@@ -85,14 +85,14 @@ def train_single_algorithm(algorithm_name, total_timesteps=100000,
             'learning_rate': 3e-4,
             'n_steps': 2048 // n_envs,
             'batch_size': 64,
-            'n_epochs': 10,
+            'n_epochs': 15,
             'gamma': 0.99,
             'gae_lambda': 0.95,
             'clip_range': 0.2,
-            'ent_coef': 0.01,
+            'ent_coef': 0.02,
             'vf_coef': 0.5,
             'max_grad_norm': 0.5,
-            'use_sde': False,  # 可以尝试True以增加探索
+            'use_sde': True,  # 可以尝试True以增加探索
             'sde_sample_freq': -1,
             'verbose': 1,
             'tensorboard_log': os.path.join(algo_save_dir, "tb_logs")
@@ -101,7 +101,7 @@ def train_single_algorithm(algorithm_name, total_timesteps=100000,
             'policy': 'MlpPolicy',
             'learning_rate': 3e-4,
             'buffer_size': 1000000,
-            'learning_starts': 1000,
+            'learning_starts': 2000,
             'batch_size': 256,
             'tau': 0.005,
             'gamma': 0.99,
@@ -114,6 +114,7 @@ def train_single_algorithm(algorithm_name, total_timesteps=100000,
             'sde_sample_freq': -1,
             'use_sde_at_warmup': False,
             'verbose': 1,
+            'ent_coef': 0.2,          # 手动设置熵系数
             'tensorboard_log': os.path.join(algo_save_dir, "tb_logs")
         },
         'TD3': {

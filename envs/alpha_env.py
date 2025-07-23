@@ -10,12 +10,12 @@ import numpy as np
 import gymnasium as gym
 from gymnasium import spaces
 import yaml
-from alpha_controller import AlphaRobotController
+from envs.alpha_controller import AlphaRobotController
 
 class AlphaRobotEnv(gym.Env):
     """Alpha Robot 强化学习环境"""
     
-    def __init__(self, render_mode="human", max_steps=100000, dense_reward=True,
+    def __init__(self, render_mode="human", max_steps=1500, dense_reward=True,
                  enable_safety=True, curriculum_learning=False):
         super(AlphaRobotEnv, self).__init__()
 
@@ -30,7 +30,7 @@ class AlphaRobotEnv(gym.Env):
         self.current_target_index = 0
         self.success_count = 0
         self.episodes_on_target = 0
-        self.required_successes = 10  # 连续成功10次才换目标
+        self.required_successes = 5  # 连续成功10次才换目标
 
         self.realistic_controller = None  # 初始化控制器
         self.use_realistic_controller = True  # 是否使用真实控制器
