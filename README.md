@@ -11,7 +11,7 @@ Current progress: Try to find a proper reward function.
 
 ## Quick Tutorial: Understanding How This Project Works
 
-> If you're new here — welcome aboard! 🫡 This is a reinforcement learning project built for training the **Alpha5 underwater robotic arm** using **PyBullet** and **Stable-Baselines3**, with the environment wrapped in **Gymnasium** format.
+> If you're new here. This is a reinforcement learning project built for training the **Alpha5 underwater robotic arm** using **PyBullet** and **Stable-Baselines3**, with the environment wrapped in **Gymnasium** format.
 
 ### How Components Talk to Each Other
 
