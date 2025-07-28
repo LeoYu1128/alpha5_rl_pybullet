@@ -17,8 +17,8 @@ from stable_baselines3.common.callbacks import (
 )
 from stable_baselines3.common.monitor import Monitor
 
-from envs.alpha_env import AlphaRobotEnv
-
+# from envs.alpha_env import AlphaRobotEnv
+from envs.alpha_end_to_end_test import AlphaRobotEnv
 
 class TensorboardCallback(BaseCallback):
     """自定义Tensorboard回调"""
@@ -114,7 +114,6 @@ def train_single_algorithm(algorithm_name, total_timesteps=100000,
             'sde_sample_freq': -1,
             'use_sde_at_warmup': False,
             'verbose': 1,
-            'ent_coef': 0.2,          # 手动设置熵系数
             'tensorboard_log': os.path.join(algo_save_dir, "tb_logs")
         },
         'TD3': {

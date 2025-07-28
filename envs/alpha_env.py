@@ -15,13 +15,13 @@ from envs.alpha_controller import AlphaRobotController
 class AlphaRobotEnv(gym.Env):
     """Alpha Robot 强化学习环境"""
     
-    def __init__(self, render_mode="human", max_steps=1500, dense_reward=True,
+    def __init__(self, render_mode="human", max_steps=1000, dense_reward=True,
                  enable_safety=True, curriculum_learning=False):
         super(AlphaRobotEnv, self).__init__()
 
         # 🆕 简单的目标管理
         self.target_list = [
-            np.array([0.2, 0.0, 0.2]),      # 目标1：正前方
+            np.array([0.2, 0.1, 0.2]),      # 目标1：正前方
             np.array([0.15, 0.15, 0.25]),   # 目标2：右前方  
             np.array([0.25, -0.15, 0.2]),   # 目标3：左前方
             np.array([0.2, 0.1, 0.2]),      # 目标4：远高位
@@ -30,8 +30,8 @@ class AlphaRobotEnv(gym.Env):
         self.current_target_index = 0
         self.success_count = 0
         self.episodes_on_target = 0
-        self.required_successes = 5  # 连续成功10次才换目标
-
+        self.required_successes = 5  # 连续成功5次才换目标
+        self.prev_distance = None
         self.realistic_controller = None  # 初始化控制器
         self.use_realistic_controller = True  # 是否使用真实控制器
         self.render_mode = render_mode
@@ -64,10 +64,10 @@ class AlphaRobotEnv(gym.Env):
         # 初始关节位置（安全的中间位置）
         self.initial_joint_positions = [
             3.0,    # joint_1: 基座旋转（中间位置）
-            3.5,    # joint_2: 肩部（稍微抬起）
+            3.0,    # joint_2: 肩部（稍微抬起）
             1.0,    # joint_3: 肘部（弯曲）
             0.0,    # joint_4: 腕部旋转（中间）
-            1.0,   # joint_5: 夹爪（微开）
+            0.01,   # joint_5: 夹爪（微开）
         ]
         
         # 连接PyBullet
@@ -107,7 +107,7 @@ class AlphaRobotEnv(gym.Env):
         self.observation_space = spaces.Box(
             low=-np.inf, high=np.inf,
             #shape=(29,), 
-            shape=(21,), 
+            shape=(16,), 
             dtype=np.float32
         )
         
@@ -363,19 +363,25 @@ class AlphaRobotEnv(gym.Env):
         """执行动作"""
         self.current_step += 1
         
-        # 应用安全约束
-        if self.enable_safety:
-            if self.current_step < self.max_steps // 2:
-                action = self._apply_safety_constraints_easy(action)
-            else:
-                action = self._apply_safety_constraints_hard(action)
-                
+        # # 应用安全约束
+        # if self.enable_safety:
+        #     if self.current_step < self.max_steps // 2:
+        #         action = self._apply_safety_constraints_easy(action)
+        #     else:
+        #         action = self._apply_safety_constraints_hard(action)
+        
+        # 简单直接的约束
+        action = np.clip(action, -1.0, 1.0)  # 确保在动作空间内
         # 将归一化动作转换为关节目标
-        target_positions = self._action_to_joint_positions(action)
-        
+        # target_positions = self._action_to_joint_positions(action)
+
+        # 将归一化的动作映射到扭矩范围
+        torques = self._action_to_torques(action)  # 不是 positions！
         # 应用关节控制
-        self._apply_joint_control(target_positions)
-        
+        # self._apply_joint_control(target_positions)
+
+        # 应用关节扭矩控制
+        self._apply_torque_control(torques)
         # 步进仿真
         for _ in range(4):
             p.stepSimulation()
@@ -469,6 +475,25 @@ class AlphaRobotEnv(gym.Env):
         self.prev_action = action.copy()
         
         return action
+    def _apply_torque_control(self, torques):
+        """直接使用力矩控制关节"""
+        for i, (joint_idx, torque) in enumerate(zip(self.joint_indices, torques)):
+            p.setJointMotorControl2(
+                self.robot_id,
+                joint_idx,
+                controlMode=p.TORQUE_CONTROL,
+                force=torque
+            )
+    def _action_to_torques(self, action):
+        """将[-1,1]的动作映射到扭矩范围"""
+        torques = []
+        for i, joint_name in enumerate(self.joint_names):
+            max_torque = self.joint_limits[joint_name]['effort']
+            # 直接映射到扭矩
+            torque = action[i] * max_torque
+            torques.append(torque)
+        return torques
+
     def _action_to_joint_positions(self, action):
         """将动作转换为关节位置"""
         target_positions = []
@@ -487,12 +512,13 @@ class AlphaRobotEnv(gym.Env):
         return target_positions
     def _apply_joint_control(self, target_positions):
         """应用关节控制"""
-        if self.use_realistic_controller and self.realistic_controller is not None:
-            # 使用真实控制器
-            return self.realistic_controller.apply_joint_control(target_positions = target_positions)
-        else:
-            # 使用原始关节控制
-            return self._apply_original_joint_control(target_positions)
+        # if self.use_realistic_controller and self.realistic_controller is not None:
+        #     # 使用真实控制器
+        #     return self.realistic_controller.apply_joint_control(target_positions = target_positions)
+        # else:
+        #     # 使用原始关节控制
+        #     return self._apply_original_joint_control(target_positions)
+        return self._apply_original_joint_control(target_positions)
     def _apply_original_joint_control(self, target_positions):
         # """应用关节控制"""
         # for i, (joint_idx, target_pos) in enumerate(zip(self.joint_indices, target_positions)):
@@ -520,46 +546,61 @@ class AlphaRobotEnv(gym.Env):
         #         positionGain=0.2,
         #         velocityGain=0.1
         #     )
-        """应用关节 PID 控制(PID 参数在此方法中定义)"""
+        """应用关节控制：所有5个关节都使用PID控制（基于alpha_controller.py的参数）"""
+        
         # 初始化：只在第一次调用时创建积分误差和前次误差缓存
         if not hasattr(self, 'integral_errors'):
+            # 为所有5个关节创建PID历史
             self.integral_errors = [0.0] * len(self.joint_indices)
             self.prev_errors = [0.0] * len(self.joint_indices)
 
         # 控制周期 dt（与仿真步长或 controller 更新率一致）
-        dt = 1.0 / 225.0  # 225 Hz 示例，可按实际调整
+        dt = 1.0 / 240.0  # 240 Hz
 
-        # 在此定义每个关节的 PID 参数（与 joint_indices 顺序对应）
-        # 例如，假设有4个关节 q0~q3：
-        p_gains = [0.5, 0.3, 0.15, 0.001]       # P 增益
-        i_gains = [0.25, 0.25, 0.15, 0.015]    # I 增益
-        d_gains = [0.005, 0.005, 0.001, 0.00001]  # D 增益
-        integral_max = [1.0, 1.0, 1.0, 1.0]    # 积分限幅
+        # 所有5个关节的 PID 参数（来自alpha_controller.py的velocity_pid_params）
+        p_gains = [0.5, 0.3, 0.15, 0.001, 10.0]        # P 增益
+        i_gains = [0.25, 0.25, 0.15, 0.015, 1.0]       # I 增益
+        d_gains = [0.005, 0.005, 0.001, 0.00001, 0.1]  # D 增益
+        integral_max = [1.0, 1.0, 1.0, 1.0, 0.5]       # 积分限幅（末端执行器用较小值）
 
         for i, (joint_idx, target_pos) in enumerate(zip(self.joint_indices, target_positions)):
             # 读取当前状态
             pos, vel, *_ = p.getJointState(self.robot_id, joint_idx)
-
-            # 获取第 i 个关节的 PID 参数
-            kp = p_gains[i]
-            ki = i_gains[i]
-            kd = d_gains[i]
-            imax = integral_max[i]
-
-            # 计算误差
+            
+            # 安全检查：确保索引不越界
+            if i >= len(p_gains):
+                print(f"警告：关节 {i} 超出PID参数范围，使用默认参数")
+                kp, ki, kd, imax = 0.1, 0.01, 0.001, 1.0
+            else:
+                kp = p_gains[i]
+                ki = i_gains[i]
+                kd = d_gains[i]
+                imax = integral_max[i]
+            
+            # 计算位置误差
             error = target_pos - pos
+            
             # 积分累加并限幅
             self.integral_errors[i] = max(-imax, min(self.integral_errors[i] + error * dt, imax))
-            # 微分
+            
+            # 微分项
             d_error = (error - self.prev_errors[i]) / dt
-
-            # PID 输出 torque
+            
+            # PID 输出
             torque = kp * error + ki * self.integral_errors[i] + kd * d_error
+            
+            # 更新历史误差
+            self.prev_errors[i] = error
+            
             # 限制最大扭矩
-            max_effort = self.joint_limits[self.joint_names[i]]['effort']
+            if i < len(self.joint_names) and self.joint_names[i] in self.joint_limits:
+                max_effort = self.joint_limits[self.joint_names[i]]['effort']
+            else:
+                max_effort = 50.0  # 默认值
+                
             torque = max(-max_effort, min(torque, max_effort))
 
-            # 发送力矩控制命令
+            # 发送扭矩控制命令
             p.setJointMotorControl2(
                 bodyUniqueId=self.robot_id,
                 jointIndex=joint_idx,
@@ -567,8 +608,17 @@ class AlphaRobotEnv(gym.Env):
                 force=torque
             )
 
-            # 更新历史误差
-            self.prev_errors[i] = error
+            # 调试信息（可选，仅末端执行器）
+            if i == 4:  # 末端执行器
+                if hasattr(self, '_debug_counter'):
+                    self._debug_counter += 1
+                else:
+                    self._debug_counter = 0
+                    
+                # 每100步打印一次调试信息
+                if self._debug_counter % 100 == 0:
+                    print(f"末端执行器 - 目标: {target_pos:.4f}, 当前: {pos:.4f}, "
+                        f"误差: {error:.4f}, 扭矩: {torque:.2f}")
 
     def set_eef_target(self, target_position):
         """设置末端执行器目标位置"""
@@ -677,7 +727,7 @@ class AlphaRobotEnv(gym.Env):
         
         # 相对信息
         relative_pos = self.target_position - ee_pos
-        
+        distance = self._get_distance_to_target()
         # 雅可比条件数（归一化）
         # jacobian_cond = min(self._compute_jacobian_condition() / 100, 1.0)
         
@@ -685,12 +735,13 @@ class AlphaRobotEnv(gym.Env):
         observation = np.concatenate([
             joint_positions,      # 5
             joint_velocities,     # 5
-            #ee_pos,              # 3
+            ee_pos,              # 3
             #ee_orn,              # 4
             self.target_position, # 3
-            relative_pos,        # 3
+            #relative_pos,        # 3
+            #[distance],         # 1
             #[jacobian_cond],     # 1
-            joint_torques        # 5
+            #joint_torques        # 5
         ]).astype(np.float32)
         
         return observation
@@ -721,65 +772,67 @@ class AlphaRobotEnv(gym.Env):
         
     def _calculate_reward(self):
         """计算奖励"""
-        # ee_pos = self._get_end_effector_pos()
-        # distance = np.linalg.norm(ee_pos - self.target_position)
-        
-        # if self.dense_reward:
-        #     # 1. 距离奖励（指数衰减）
-        #     distance_reward = np.exp(-10 * distance)
-            
-        #     # 2. 进步奖励
-        #     progress = self.prev_distance - distance
-        #     progress_reward = 50 * progress
-            
-        #     # 3. 成功奖励
-        #     if distance < 0.02:
-        #         success_reward = 200
-        #     elif distance < 0.05:
-        #         success_reward = 50
-        #     else:
-        #         success_reward = 0
-                
-        #     # 4. 平滑性奖励
-        #     joint_velocities = self._get_joint_velocities()
-        #     smoothness_reward = -0.01 * np.sum(np.square(joint_velocities))
-            
-        #     # 5. 能量效率奖励
-        #     joint_torques = self._get_joint_torques()
-        #     energy_reward = -0.001 * np.sum(np.square(joint_torques))
-            
-        #     # 6. 姿态奖励（保持稳定姿态）
-        #     ee_state = p.getLinkState(self.robot_id, self.tcp_index)
-        #     ee_orn = p.getEulerFromQuaternion(ee_state[1])
-        #     orientation_penalty = -0.1 * (abs(ee_orn[0]) + abs(ee_orn[1]))
-            
-        #     # 总奖励
-        #     reward = (distance_reward + progress_reward + success_reward + 
-        #              smoothness_reward + energy_reward + orientation_penalty)
-            
-        # else:
-        #     # 稀疏奖励
-        #     if distance < 0.02:
-        #         reward = 100
-        #     else:
-        #         reward = -1
-                
-        # return reward
-
-        """极简奖励函数"""
         ee_pos = self._get_end_effector_pos()
         distance = np.linalg.norm(ee_pos - self.target_position)
         
-        # 方法1：简单线性奖励
-        reward = 1.0 - distance  # 距离越近奖励越高
-        
-        # 方法2：成功/失败奖励
-        if distance < 0.02:
-            reward = 10.0  # 成功
+        if self.dense_reward:
+            # 1. 距离奖励（指数衰减）
+            distance_reward = np.exp(-10 * distance)
+            
+            if self.prev_distance is not None:
+                # 2. 进步奖励
+                progress = self.prev_distance - distance
+                progress_reward = 50 * progress
+            else:
+                progress_reward = 0
+            # 3. 成功奖励
+            if distance < 0.02:
+                success_reward = 200
+            elif distance < 0.05:
+                success_reward = 50
+            else:
+                success_reward = 0
+                
+            # 4. 平滑性奖励
+            joint_velocities = self._get_joint_velocities()
+            smoothness_reward = -0.01 * np.sum(np.square(joint_velocities))
+            
+            # 5. 能量效率奖励
+            joint_torques = self._get_joint_torques()
+            energy_reward = -0.001 * np.sum(np.square(joint_torques))
+            
+            # 6. 姿态奖励（保持稳定姿态）
+            ee_state = p.getLinkState(self.robot_id, self.tcp_index)
+            ee_orn = p.getEulerFromQuaternion(ee_state[1])
+            orientation_penalty = -0.1 * (abs(ee_orn[0]) + abs(ee_orn[1]))
+            
+            # 总奖励
+            reward = (distance_reward + progress_reward + success_reward + 
+                     smoothness_reward + energy_reward + orientation_penalty)
+            
         else:
-            reward = -0.1  # 小惩罚鼓励尽快完成
-        
+            # 稀疏奖励
+            if distance < 0.02:
+                reward = 100
+            else:
+                reward = -1
+                
         return reward
+
+        # """极简奖励函数"""
+        # ee_pos = self._get_end_effector_pos()
+        # distance = np.linalg.norm(ee_pos - self.target_position)
+        
+        # # 方法1：简单线性奖励
+        # reward = 1.0 - distance  # 距离越近奖励越高
+        
+        # # 方法2：成功/失败奖励
+        # if distance < 0.02:
+        #     reward = 10.0  # 成功
+        # else:
+        #     reward = -0.1  # 小惩罚鼓励尽快完成
+        
+        # return reward
         
     def _get_end_effector_pos(self):
         """获取末端执行器位置"""

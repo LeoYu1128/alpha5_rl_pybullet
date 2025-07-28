@@ -228,7 +228,7 @@ class AlphaRobotController:
             
         return full_desired_vel
     
-    def apply_joint_control(self, target_positions=None, target_velocities=None, dt=1.0/225.0):
+    def apply_joint_control(self, target_positions=None, target_velocities=None, dt=1.0/240.0):
         """
         应用综合关节控制
         这是主要的控制方法，替换您原来的 _apply_joint_control
