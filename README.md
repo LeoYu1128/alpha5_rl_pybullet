@@ -5,7 +5,7 @@ Using gymnasium and stablebaseline3<br>
 run the train_new.py file <br>
 e.g.<br>
 python train_new.py --mode train --algo SAC --timesteps 50000 --n_envs 4<br>
-(Support DDPG, SAC, PPO)<br>
+(Support DDPG, SAC, PPO,TD3)<br>
 Remember to use the virtual environment (venvs in this project).<br>
 Current progress: Try to find a proper reward function.
 
