@@ -1,6 +1,3 @@
-"""
-基础训练器类 - 所有RL算法的基类
-"""
 
 import os
 import json

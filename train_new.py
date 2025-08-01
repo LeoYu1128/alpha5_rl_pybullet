@@ -17,8 +17,8 @@ from stable_baselines3.common.callbacks import (
 )
 from stable_baselines3.common.monitor import Monitor
 
-# from envs.alpha_env import AlphaRobotEnv
-from envs.alpha_end_to_end_test import AlphaRobotEnv
+from envs.alpha_env import AlphaRobotEnv
+# from envs.alpha_end_to_end_test import AlphaRobotEnv
 
 class TensorboardCallback(BaseCallback):
     """自定义Tensorboard回调"""
@@ -284,6 +284,9 @@ def test_trained_model(model_path, env_path=None, n_episodes=10, render=True):
         env = VecNormalize.load(env_path, env)
         env.training = False
         env.norm_reward = False
+        is_vec_env = True
+    else:
+        is_vec_env = False
     
     # 加载模型
     # 自动检测模型类型
@@ -306,14 +309,31 @@ def test_trained_model(model_path, env_path=None, n_episodes=10, render=True):
     successes = []
     
     for episode in range(n_episodes):
-        obs = env.reset()
+        # 根据环境类型处理reset的返回值
+        if is_vec_env:
+            obs = env.reset()  # VecEnv API: 只返回observation
+        else:
+            obs, info = env.reset()  # Gym API: 返回(observation, info)
+            
         done = False
         episode_reward = 0
         episode_length = 0
         
         while not done:
             action, _ = model.predict(obs, deterministic=True)
-            obs, reward, done, info = env.step(action)
+            
+            # 根据环境类型处理step的返回值
+            if is_vec_env:
+                obs, reward, done, info = env.step(action)
+                # 对于向量化环境，获取标量值
+                if isinstance(reward, np.ndarray):
+                    reward = reward[0]
+                if isinstance(done, np.ndarray):
+                    done = done[0]
+            else:
+                obs, reward, terminated, truncated, info = env.step(action)
+                done = terminated or truncated
+                
             episode_reward += reward
             episode_length += 1
             
@@ -323,7 +343,7 @@ def test_trained_model(model_path, env_path=None, n_episodes=10, render=True):
         episode_rewards.append(episode_reward)
         episode_lengths.append(episode_length)
         
-        # 处理向量化环境的info
+        # 处理info
         if isinstance(info, list):
             info = info[0]
         successes.append(info.get('success', False))

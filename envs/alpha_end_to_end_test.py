@@ -1,8 +1,3 @@
-"""
-Alpha Robot 强化学习环境 - 整合真实物理参数
-使用直接扭矩控制 + 真实水下动力学
-"""
-
 import pybullet as p
 import numpy as np
 import gymnasium as gym
@@ -281,5 +276,3 @@ class AlphaRobotEnvRealistic(gym.Env):
             success_bonus = 0.0
             
         return position_reward + velocity_penalty + torque_penalty + success_bonus
-        
-    # ... 其他辅助方法 ...

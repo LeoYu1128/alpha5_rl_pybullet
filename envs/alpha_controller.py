@@ -1,18 +1,10 @@
-# ===== 步骤1: 创建控制器文件 =====
-# 创建文件: alpha_controller.py (与您的 practice_answer.py 在同一目录)
-
-"""
-alpha_controller.py
-完整的 AlphaRobotController 类
-"""
-
 import numpy as np
 import pybullet as p
 from scipy.spatial.transform import Rotation as R
 
 
 class AlphaRobotController:
-    """Alpha机器人高保真度控制器"""
+
     
     def __init__(self, robot_id, joint_indices, joint_names):
         self.robot_id = robot_id
@@ -229,10 +221,7 @@ class AlphaRobotController:
         return full_desired_vel
     
     def apply_joint_control(self, target_positions=None, target_velocities=None, dt=1.0/240.0):
-        """
-        应用综合关节控制
-        这是主要的控制方法，替换您原来的 _apply_joint_control
-        """
+        
         
         # 获取当前关节状态
         current_positions = np.zeros(len(self.joint_indices))
@@ -336,124 +325,3 @@ class AlphaRobotController:
             self.use_underwater_compensation = underwater
         if actuator_model is not None:
             self.use_actuator_model = actuator_model
-
-
-# # ===== 步骤2: 修改您的 practice_answer.py =====
-
-# """
-# 在您的 practice_answer.py 文件中进行以下修改：
-# """
-
-# # 1. 在文件顶部添加导入
-# from alpha_controller import AlphaRobotController
-
-# # 2. 在 AlphaRobotEnv 类的 __init__ 方法最后添加：
-# def __init__(self, render_mode="human", max_steps=1000, dense_reward=True,
-#              enable_safety=True, curriculum_learning=False):
-#     # ... 您所有原有的代码保持不变 ...
-    
-#     # 在最后添加这几行：
-#     self.realistic_controller = None  # 先初始化为None
-#     self.use_realistic_control = True  # 是否使用严谨控制器
-
-# # 3. 在 _setup_scene 方法的最后添加：
-# def _setup_scene(self):
-#     # ... 您所有原有的代码保持不变 ...
-    
-#     # 在最后添加：
-#     # 初始化严谨控制器
-#     if self.use_realistic_control:
-#         self.realistic_controller = AlphaRobotController(
-#             self.robot_id,
-#             self.joint_indices, 
-#             self.joint_names
-#         )
-#         print("已启用严谨的AlphaRobotController")
-
-# # 4. 替换您的 _apply_joint_control 方法：
-# def _apply_joint_control(self, target_positions):
-#     """使用严谨的控制器"""
-#     if self.use_realistic_control and self.realistic_controller is not None:
-#         # 使用严谨的控制器
-#         return self.realistic_controller.apply_joint_control(target_positions=target_positions)
-#     else:
-#         # 保留您原来的控制方法作为备用
-#         return self._apply_original_joint_control(target_positions)
-
-# # 5. 将您原来的 _apply_joint_control 方法重命名为：
-# def _apply_original_joint_control(self, target_positions):
-#     """您原来的控制方法 - 作为备用"""
-#     # 把您原来的 _apply_joint_control 方法的内容复制到这里
-#     # ... 您原来的PID控制代码 ...
-#     pass
-
-# # 6. 添加末端执行器控制方法：
-# def set_eef_target(self, target_position):
-#     """设置末端执行器目标位置"""
-#     if self.realistic_controller is not None:
-#         self.realistic_controller.set_eef_target(target_position, enable=True)
-#         print(f"末端执行器目标设置为: {target_position}")
-
-# def toggle_control_mode(self, use_eef_control=False):
-#     """切换控制模式"""
-#     if self.realistic_controller is not None:
-#         self.realistic_controller.eef_control_enabled = use_eef_control
-#         if use_eef_control:
-#             print("已切换到末端执行器控制模式")
-#         else:
-#             print("已切换到关节控制模式")
-
-# def enable_controller_features(self, **kwargs):
-#     """启用控制器功能"""
-#     if self.realistic_controller is not None:
-#         self.realistic_controller.enable_features(**kwargs)
-
-
-# # ===== 步骤3: 使用示例 =====
-
-# """
-# 现在您可以这样使用：
-# """
-
-# # 创建环境
-# env = AlphaRobotEnv(render_mode="human")
-
-# # 方式1: 正常的关节控制 (现在使用严谨的控制器)
-# obs = env.reset()
-# action = np.array([0.1, -0.1, 0.2, 0.0, 0.0])
-# obs, reward, done, truncated, info = env.step(action)
-
-# # 方式2: 末端执行器控制
-# env.set_eef_target([0.25, 0.1, 0.2])  # 设置目标位置
-# env.toggle_control_mode(use_eef_control=True)  # 切换到末端执行器控制
-# obs, reward, done, truncated, info = env.step(action)  # 现在会自动到达目标位置
-
-# # 方式3: 启用/禁用特定功能
-# env.enable_controller_features(
-#     feedforward=True,     # 启用前馈控制
-#     underwater=True,      # 启用水下补偿
-#     actuator_model=False  # 禁用执行器模型
-# )
-
-# # 方式4: 在训练循环中动态设置目标
-# for episode in range(100):
-#     obs = env.reset()
-    
-#     # 随机设置一个末端执行器目标
-#     target = np.random.uniform([0.1, -0.2, 0.1], [0.3, 0.2, 0.3])
-#     env.set_eef_target(target)
-#     env.toggle_control_mode(use_eef_control=True)
-    
-#     for step in range(1000):
-#         # 现在action可以被智能地解释为对目标的微调
-#         obs, reward, done, truncated, info = env.step(action)
-#         if done:
-#             break
-
-# print("集成完成！现在您有了:")
-# print("✅ 严谨的PID控制 (基于真实参数)")
-# print("✅ 末端执行器控制 (基于DH运动学)")  
-# print("✅ 水下动力学补偿")
-# print("✅ 执行器模型仿真")
-# print("✅ 可以随时切换控制模式")
-# print("✅ 所有功能都可以独立启用/禁用")

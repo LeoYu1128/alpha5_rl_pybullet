@@ -1,8 +1,3 @@
-"""
-Alpha Robot 强化学习环境 - 增强版
-包含安全机制、奇异性避免和碰撞检测
-"""
-
 import pybullet as p
 import pybullet_data
 import os
@@ -792,23 +787,9 @@ class AlphaRobotEnv(gym.Env):
                 success_reward = 50
             else:
                 success_reward = 0
-                
-            # 4. 平滑性奖励
-            joint_velocities = self._get_joint_velocities()
-            smoothness_reward = -0.01 * np.sum(np.square(joint_velocities))
-            
-            # 5. 能量效率奖励
-            joint_torques = self._get_joint_torques()
-            energy_reward = -0.001 * np.sum(np.square(joint_torques))
-            
-            # 6. 姿态奖励（保持稳定姿态）
-            ee_state = p.getLinkState(self.robot_id, self.tcp_index)
-            ee_orn = p.getEulerFromQuaternion(ee_state[1])
-            orientation_penalty = -0.1 * (abs(ee_orn[0]) + abs(ee_orn[1]))
             
             # 总奖励
-            reward = (distance_reward + progress_reward + success_reward + 
-                     smoothness_reward + energy_reward + orientation_penalty)
+            reward = (distance_reward + progress_reward + success_reward)
             
         else:
             # 稀疏奖励

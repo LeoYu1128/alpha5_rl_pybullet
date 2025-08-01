@@ -1,7 +1,7 @@
 import time
 from envs.alpha_env import AlphaRobotEnv
 
-# 把诊断函数直接放在这个文件里，或者正确导入
+
 def diagnose_gripper_issue(env):
     """全面诊断夹爪问题"""
     import pybullet as p
