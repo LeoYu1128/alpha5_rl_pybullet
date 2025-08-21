@@ -1,5 +1,5 @@
-# Alpha5 Underwater Manipulator RL Framework
-IN PROGRESS.
+# Alpha5 Underwater Manipulator RL Framework (IN PROGRESS)
+
 **Reinforcement Learning for the Alpha5 Arm in PyBullet Simulation**
 Using gymnasium and stablebaseline3<br>
 run the train_new.py file <br>
