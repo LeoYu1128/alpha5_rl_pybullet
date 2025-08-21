@@ -14,7 +14,7 @@ class AlphaRobotEnv(gym.Env):
                  enable_safety=True, curriculum_learning=False):
         super(AlphaRobotEnv, self).__init__()
 
-        # 🆕 简单的目标管理
+        # 簡單的目標
         self.target_list = [
             np.array([0.2, 0.1, 0.2]),      # 目标1：正前方
             np.array([0.15, 0.15, 0.25]),   # 目标2：右前方  
@@ -47,7 +47,7 @@ class AlphaRobotEnv(gym.Env):
             'joint_2': {'lower': 0.0174533, 'upper': 3.40339, 'effort': 54.36, 'velocity': 2.0},
             'joint_3': {'lower': 0.0174533, 'upper': 3.40339, 'effort': 47.112, 'velocity': 2.0},
             'joint_4': {'lower': -3.14159, 'upper': 3.14159, 'effort': 33.069, 'velocity': 2.0},
-            'joint_5': {'lower': 0.0013, 'upper': 0.0133, 'effort': 28.992, 'velocity': 1.0}
+            'joint_5': {'lower': 0.0013, 'upper': 0.0133, 'effort': 28.992, 'velocity': 1.0} # 夹爪关节 open and close
         }
         
         # 安全参数

@@ -1,5 +1,5 @@
 # Alpha5 Underwater Manipulator RL Framework
-
+IN PROGRESS.
 **Reinforcement Learning for the Alpha5 Arm in PyBullet Simulation**
 Using gymnasium and stablebaseline3<br>
 run the train_new.py file <br>
@@ -7,7 +7,7 @@ e.g.<br>
 python train_new.py --mode train --algo SAC --timesteps 50000 --n_envs 4<br>
 (Support DDPG, SAC, PPO,TD3)<br>
 Remember to use the virtual environment (venvs in this project).<br>
-Current progress: Try to find a proper reward function.
+Current progress: Try to find a proper reward function. And try end-to-end at the moment
 
 ## Quick Tutorial: Understanding How This Project Works
 
@@ -16,7 +16,7 @@ Current progress: Try to find a proper reward function.
 ### How Components Talk to Each Other
 
 Here's the flow:
-
+ 
 - **PyBullet**: A lightweight physics simulator that provides core rigid body dynamics, joint control, and collision detection.
 - **Gymnasium**: A modern, well-maintained interface for reinforcement learning environments. It wraps PyBullet environments using the standard `reset()` and `step()` methods.
 - **Stable-Baselines3**: A collection of reliable and scalable RL algorithms like PPO, SAC, TD3 — used to train your agent.

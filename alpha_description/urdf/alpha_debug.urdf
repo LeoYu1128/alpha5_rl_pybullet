@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<robot name="alpha_robot_debug">
+  <link name="world"/>
+
+  <material name="red">
+    <color rgba="1 0 0 1"/>
+  </material>
+  
+  <material name="green">
+    <color rgba="0 1 0 1"/>
+  </material>
+  
+  <material name="blue">
+    <color rgba="0 0 1 1"/>
+  </material>
+
+  <!-- 基座 -->
+  <link name="base_link">
+    <inertial>
+      <mass value="2.0"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.2 0.2 0.1"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.2 0.2 0.1"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="base_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
+
+  <!-- 第一个旋转关节 -->
+  <link name="link1">
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0 0 0.1"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0.1"/>
+      <material name="green"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.15" radius="0.04"/>
+      </geometry>
+      <origin xyz="0 0 0.075"/>
+    </collision>
+  </link>
+  
+  <!-- 这是关键：joint_1应该能够Z轴旋转 -->
+  <joint name="joint_1" type="revolute">
+    <parent link="base_link"/>
+    <child link="link1"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="50.0" lower="-3.14159" upper="3.14159" velocity="2.0"/>
+    <dynamics damping="1.0" friction="0.5"/>
+  </joint>
+
+  <!-- 第二个旋转关节 -->
+  <link name="link2">
+    <inertial>
+      <mass value="0.8"/>
+      <origin xyz="0.1 0 0"/>
+      <inertia ixx="0.02" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.2 0.08 0.08"/>
+      </geometry>
+      <origin xyz="0.1 0 0"/>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.18 0.06 0.06"/>
+      </geometry>
+      <origin xyz="0.09 0 0"/>
+    </collision>
+  </link>
+  
+  <!-- 这是关键：joint_2应该能够Y轴旋转（俯仰） -->
+  <joint name="joint_2" type="revolute">
+    <parent link="link1"/>
+    <child link="link2"/>
+    <origin xyz="0 0 0.2" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="50.0" lower="-1.5708" upper="1.5708" velocity="2.0"/>
+    <dynamics damping="1.0" friction="0.5"/>
+  </joint>
+
+  <!-- 末端链接 -->
+  <link name="end_link">
+    <inertial>
+      <mass value="0.3"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <sphere radius="0.03"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="end_joint" type="fixed">
+    <parent link="link2"/>
+    <child link="end_link"/>
+    <origin xyz="0.2 0 0" rpy="0 0 0"/>
+  </joint>
+
+</robot>

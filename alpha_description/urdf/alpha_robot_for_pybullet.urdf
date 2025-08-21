@@ -82,7 +82,7 @@
     <child link="alpha_m2_1_1_link"/>
     <origin xyz="0 0 0.014" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
-    <limit effort="54.36" lower="0.032" upper="6.02" velocity="100000"/>
+    <limit effort="54.36" lower="0.032" upper="6.02" velocity="10"/>
     <dynamics damping="0.7" friction="0.1"/>
   </joint>
 
@@ -127,7 +127,7 @@
     <child link="alpha_m2_joint_link"/>
     <origin xyz="-0.02 0 0.033" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
-    <limit effort="54.36" lower="0.0174533" upper="3.40339" velocity="100000"/>
+    <limit effort="54.36" lower="0.0174533" upper="3.40339" velocity="10"/>
     <dynamics damping="0.7" friction="0.1"/>
   </joint>
 
@@ -160,7 +160,7 @@
     <child link="alpha_m2_1_2_link"/>
     <origin xyz="-0.04 0 -0.1453" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
-    <limit effort="47.112" lower="0.0174533" upper="3.40339" velocity="100000"/>
+    <limit effort="47.112" lower="0.0174533" upper="3.40339" velocity="10"/>
     <dynamics damping="0.7" friction="0.1"/>
   </joint>
 
@@ -193,7 +193,7 @@
     <child link="alpha_m1_link"/>
     <origin xyz="0.02 0 0.033" rpy="0 0 0"/>
     <axis xyz="0 0 -1"/>
-    <limit effort="33.069" lower="0.0" upper="3.22" velocity="100000"/>
+    <limit effort="33.069" lower="0.0" upper="3.22" velocity="10"/>
     <dynamics damping="0.7" friction="0.1"/>
   </joint>
 
@@ -226,7 +226,7 @@
     <parent link="alpha_ee_base_link"/>
     <child link="alpha_push_rod"/>
     <axis xyz="0 0 1"/>
-    <limit effort="28.992" lower="0.0013" upper="0.0133" velocity="100000"/>
+    <limit effort="28.992" lower="0.0013" upper="0.0133" velocity="10"/>
     <dynamics damping="10.0" friction="1.0"/>
   </joint>
 

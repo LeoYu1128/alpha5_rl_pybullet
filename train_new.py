@@ -17,8 +17,9 @@ from stable_baselines3.common.callbacks import (
 )
 from stable_baselines3.common.monitor import Monitor
 
-from envs.alpha_env import AlphaRobotEnv
+#from envs.alpha_env import AlphaRobotEnv
 # from envs.alpha_end_to_end_test import AlphaRobotEnv
+from envs.alpha_torque_env import AlphaRobotTorqueEnv
 
 class TensorboardCallback(BaseCallback):
     """自定义Tensorboard回调"""
@@ -54,7 +55,7 @@ class TensorboardCallback(BaseCallback):
 def make_env(render_mode=None):
     """创建环境"""
     def _init():
-        env = AlphaRobotEnv(render_mode=render_mode)
+        env = AlphaRobotTorqueEnv(render_mode=render_mode)
         env = Monitor(env)
         return env
     return _init
@@ -276,7 +277,7 @@ def test_trained_model(model_path, env_path=None, n_episodes=10, render=True):
     """测试训练好的模型"""
     
     # 创建环境
-    env = AlphaRobotEnv(render_mode="human" if render else None)
+    env = AlphaRobotTorqueEnv(render_mode="human" if render else None)
     
     # 如果有保存的归一化参数，加载它们
     if env_path and os.path.exists(env_path):
