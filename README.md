@@ -36,3 +36,8 @@ pip install -r requirements.txt
 # Start training (with PPO for example)
 python train_new.py --mode train --algo PPO
 
+# How to check the results and the graph?
+# run this in terminal
+# for example
+cd results/PPO_20250821_100330
+tensorboard --logdir=tb_logs
