@@ -1,0 +1,10 @@
+path: D:\thesis\alpha5_rl_pybullet\trash_ICRA19\trash_ICRA19\dataset
+train: train
+val: val
+test: test
+
+nc: 3
+names:
+  0: trash
+  1: biological
+  2: rov
