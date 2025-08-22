@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# ignore dataset
+trash_ICRA19/
