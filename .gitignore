@@ -5,3 +5,8 @@ __pycache__/
 
 # ignore dataset
 trash_ICRA19/
+
+reports/
+logs/
+results/
+runs/
