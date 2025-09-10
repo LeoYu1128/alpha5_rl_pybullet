@@ -8,27 +8,11 @@
     <color rgba="0.3 0.3 0.3 1"/>
   </material>
 
-  <!-- Base link - using link_0 data from link_urdf.yaml -->
-  <link name="alpha_base_link">
-    <inertial>
-      <mass value="0.1"/>
-      <origin xyz="0 0 0"/>
-      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
-    </inertial>
-  </link>
-  
-  <!-- Fixed joint from world to base -->
-  <joint name="alpha_base_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-    <parent link="world"/>
-    <child link="alpha_base_link"/>
-  </joint>
-
-  <!-- M3 Inline link - using alpha_inertial_params_link_urdf.yaml link_0 -->
-  <link name="alpha_m3_inline_link">
+  <!-- Base link -->
+  <link name="base_link">
     <visual>
       <geometry>
-        <mesh filename="meshes/M3-INLINE.stl"/>
+        <mesh filename="meshes/RS1-1010.dae"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="alpha_black"/>
@@ -37,60 +21,87 @@
       <geometry>
         <cylinder length="0.150" radius="0.020"/>
       </geometry>
-      <origin rpy="0 1.57075 0" xyz="-0.075 0 0"/>
+      <origin rpy="0 1.57075 0" xyz="-0.055 0 0"/>
     </collision>
     <inertial>
-      <mass value="0.367"/>
-      <origin xyz="-0.07347272752043597 -0.006114910081743869 -0.0033133487738419617"/>
-      <inertia ixx="0.00010349630769738964" ixy="1.3540203864991837e-05" ixz="-6.35202283328774e-05" 
-               iyy="0.0010513913877401092" iyz="2.573127984490461e-06" izz="0.0010582080712667847"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
     </inertial>
   </link>
   
-  <joint name="alpha_base_link_joint" type="fixed">
-    <parent link="alpha_base_link"/>
-    <child link="alpha_m3_inline_link"/>
+  <!-- Fixed joint from world to base -->
+  <joint name="base_joint" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="world"/>
+    <child link="base_link"/>
   </joint>
 
-  <!-- M2-1-1 link - using alpha_inertial_params_link_urdf.yaml link_1 -->
-  <link name="alpha_m2_1_1_link">
+  <!-- M3 Inline link -->
+  <link name="m3_inline_link">
     <visual>
       <geometry>
-        <mesh filename="meshes/M2-1-1.stl"/>
+        <mesh filename="meshes/M3-INLINE.dae"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="alpha_black"/>
     </visual>
     <collision>
       <geometry>
-        <cylinder length="0.066" radius="0.020"/>
+        <cylinder length="0.150" radius="0.020"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0.000"/>
+      <origin rpy="0 1.57075 0" xyz="-0.055 0 0"/>
     </collision>
     <inertial>
-      <mass value="0.161"/>
-      <origin xyz="0.007746 0.000112 0.025038"/>
-      <inertia ixx="0.00010946899999999999" ixy="-8.08e-07" ixz="-2.9828e-05" 
-               iyy="0.000122362" iyz="-5.44e-07" izz="4.3987e-05"/>
+      <mass value="0.341"/>
+      <origin xyz="-0.055 0 0"/>
+      <inertia ixx="0.0000682" ixy="0" ixz="0" iyy="0.000673" iyz="0" izz="0.000673"/>
     </inertial>
   </link>
   
-  <!-- Joint 1 - set reasonable initial angle -->
-  <joint name="joint_1" type="revolute">
-    <parent link="alpha_m3_inline_link"/>
-    <child link="alpha_m2_1_1_link"/>
-    <origin xyz="0 0 0.014" rpy="0 0 0"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="54.36" lower="0.032" upper="6.02" velocity="10"/>
-    <dynamics damping="0.7" friction="0.1"/>
+  <!-- Mount joint -->
+  <joint name="mount_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="m3_inline_link"/>
+    <origin xyz="0.124 0.004 0" rpy="0 0 0"/>
   </joint>
 
-  <!-- M2 Joint link - using alpha_inertial_params_link_urdf.yaml link_2 -->
-  <link name="alpha_m2_joint_link">
+  <!-- M2-1-1 link -->
+  <link name="m2_1_1_link">
     <visual>
       <geometry>
-        <mesh filename="meshes/M2.stl"/>
+        <mesh filename="meshes/M2-1-1.dae"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="alpha_black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.033" radius="0.020"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0165"/>
+    </collision>
+    <inertial>
+      <mass value="0.194"/>
+      <origin xyz="0 0 0.0165"/>
+      <inertia ixx="0.000037" ixy="0" ixz="0" iyy="0.000037" iyz="0" izz="0.0000388"/>
+    </inertial>
+  </link>
+  
+  <!-- Joint 1 (axis_e) - Base Joint -->
+  <joint name="joint_1" type="revolute">
+    <parent link="m3_inline_link"/>
+    <child link="m2_1_1_link"/>
+    <origin xyz="0 0 0.014"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="9.0" lower="-3.072" upper="3.072" velocity="0.5"/>
+    <dynamics damping="0.1" friction="0.1"/>
+  </joint>
+
+  <!-- M2 link -->
+  <link name="m2_link">
+    <visual>
+      <geometry>
+        <mesh filename="meshes/M2.dae"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="alpha_black"/>
@@ -114,28 +125,27 @@
       <origin rpy="1.5707 0 0" xyz="-0.040 0 -0.1453"/>
     </collision>
     <inertial>
-      <mass value="0.38"/>
-      <origin xyz="0.073563 -9.1e-05 -0.000734"/>
-      <inertia ixx="8.2697e-05" ixy="7.4836e-05" ixz="1.866e-06" 
-               iyy="0.0008471479999999999" iyz="-3.17e-07" izz="0.0008684829999999999"/>
+      <mass value="0.429"/>
+      <origin xyz="-0.02 0 -0.0725"/>
+      <inertia ixx="0.0008907" ixy="0" ixz="0" iyy="0.0008907" iyz="0" izz="0.0000858"/>
     </inertial>
   </link>
   
-  <!-- Joint 2 - set reasonable initial angle -->
+  <!-- Joint 2 (axis_d) - Shoulder Joint -->
   <joint name="joint_2" type="revolute">
-    <parent link="alpha_m2_1_1_link"/>
-    <child link="alpha_m2_joint_link"/>
-    <origin xyz="-0.02 0 0.033" rpy="0 0 0"/>
+    <parent link="m2_1_1_link"/>
+    <child link="m2_link"/>
+    <origin xyz="-0.02 0 0.033" rpy="0 1.745 0"/>
     <axis xyz="0 1 0"/>
-    <limit effort="54.36" lower="0.0174533" upper="3.40339" velocity="10"/>
-    <dynamics damping="0.7" friction="0.1"/>
+    <limit effort="9.0" lower="-1.745" upper="1.745" velocity="0.5"/>
+    <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
-  <!-- M2-1-2 link - using alpha_inertial_params_link_urdf.yaml link_3 -->
-  <link name="alpha_m2_1_2_link">
+  <!-- M2-1-3 link -->
+  <link name="m2_1_3_link">
     <visual>
       <geometry>
-        <mesh filename="meshes/M2-1-3.stl"/>
+        <mesh filename="meshes/M2-1-3.dae"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="alpha_black"/>
@@ -147,58 +157,56 @@
       <origin rpy="0 0 0" xyz="0.02 0 0.0165"/>
     </collision>
     <inertial>
-      <mass value="0.142"/>
-      <origin xyz="0.011188 -0.01666 0.000148"/>
-      <inertia ixx="6.359599999999999e-05" ixy="2.1363e-05" ixz="8.02e-07" 
-               iyy="4.0651e-05" iyz="-3.37e-07" izz="7.5158e-05"/>
+      <mass value="0.115"/>
+      <origin xyz="0.02 0 0.0165"/>
+      <inertia ixx="0.0000219" ixy="0" ixz="0" iyy="0.0000219" iyz="0" izz="0.000023"/>
     </inertial>
   </link>
   
-  <!-- Joint 3 - remove complex rotation -->
+  <!-- Joint 3 (axis_c) - Elbow Joint -->
   <joint name="joint_3" type="revolute">
-    <parent link="alpha_m2_joint_link"/>
-    <child link="alpha_m2_1_2_link"/>
-    <origin xyz="-0.04 0 -0.1453" rpy="0 0 0"/>
+    <parent link="m2_link"/>
+    <child link="m2_1_3_link"/>
+    <origin xyz="-0.04 0 -0.1453" rpy="0 0.204 3.14159"/>
     <axis xyz="0 1 0"/>
-    <limit effort="47.112" lower="0.0174533" upper="3.40339" velocity="10"/>
-    <dynamics damping="0.7" friction="0.1"/>
+    <limit effort="9.0" lower="-1.614" upper="1.614" velocity="0.5"/>
+    <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
-  <!-- M1 link - using alpha_inertial_params_link_urdf.yaml link_4 -->
-  <link name="alpha_m1_link">
+  <!-- M1 link -->
+  <link name="m1_link">
     <visual>
       <geometry>
-        <mesh filename="meshes/RS1-100-101-123.stl"/>
+        <mesh filename="meshes/M1.dae"/>
       </geometry>
       <origin rpy="0 -1.5707 0" xyz="0 0 0"/>
       <material name="alpha_black"/>
     </visual>
     <collision>
       <geometry>
-        <cylinder length="0.10975" radius="0.020"/>
+        <cylinder length="0.1" radius="0.020"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0.00 0 0.054875"/>
+      <origin rpy="0 0 0" xyz="0 0 0.05"/>
     </collision>
     <inertial>
-      <mass value="0.355"/>
-      <origin xyz="-3.0e-05 -0.001482 -0.100881"/>
-      <inertia ixx="0.0006159210000000001" ixy="-6.7e-08" ixz="7.916e-06" 
-               iyy="0.000625307" iyz="4.2799999999999997e-07" izz="6.2574e-05"/>
+      <mass value="0.200"/>
+      <origin xyz="0 0 0.05"/>
+      <inertia ixx="0.0001867" ixy="0" ixz="0" iyy="0.0001867" iyz="0" izz="0.00004"/>
     </inertial>
   </link>
   
-  <!-- Joint 4 - simplify rotation -->
+  <!-- Joint 4 (axis_b) - Wrist Joint -->
   <joint name="joint_4" type="revolute">
-    <parent link="alpha_m2_1_2_link"/>
-    <child link="alpha_m1_link"/>
-    <origin xyz="0.02 0 0.033" rpy="0 0 0"/>
+    <parent link="m2_1_3_link"/>
+    <child link="m1_link"/>
+    <origin xyz="0.02 0 0.033" rpy="0 0 2.09439"/>
     <axis xyz="0 0 -1"/>
-    <limit effort="33.069" lower="0.0" upper="3.22" velocity="10"/>
-    <dynamics damping="0.7" friction="0.1"/>
+    <limit effort="9.0" lower="-0.785" upper="0.785" velocity="0.5"/>
+    <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
-  <!-- End effector base -->
-  <link name="alpha_ee_base_link">
+  <!-- End effector base link -->
+  <link name="ee_base_link">
     <inertial>
       <mass value="0.05"/>
       <origin xyz="0 0 0.005"/>
@@ -206,14 +214,14 @@
     </inertial>
   </link>
   
-  <joint name="alpha_ee_joint" type="fixed">
+  <joint name="ee_joint" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 0.09975"/>
-    <parent link="alpha_m1_link"/>
-    <child link="alpha_ee_base_link"/>
+    <parent link="m1_link"/>
+    <child link="ee_base_link"/>
   </joint>
 
   <!-- Push rod -->
-  <link name="alpha_push_rod">
+  <link name="push_rod">
     <inertial>
       <mass value="0.02"/>
       <origin xyz="0 0 0.0075"/>
@@ -221,21 +229,23 @@
     </inertial>
   </link>
   
+  <!-- Joint 5 (axis_a) - Prismatic joint for gripper control -->
   <joint name="joint_5" type="prismatic">
     <origin rpy="0 0 0" xyz="0 0 0.009"/>
-    <parent link="alpha_ee_base_link"/>
-    <child link="alpha_push_rod"/>
+    <parent link="ee_base_link"/>
+    <child link="push_rod"/>
     <axis xyz="0 0 1"/>
-    <limit effort="28.992" lower="0.0013" upper="0.0133" velocity="10"/>
-    <dynamics damping="10.0" friction="1.0"/>
+    <limit effort="10" lower="0.001" upper="0.013" velocity="10"/>
+    <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
-  <!-- Standard gripper base -->
-  <link name="alpha_standard_jaws_base_link">
+  <!-- Standard gripper base (RS1-124) -->
+  <link name="standard_jaws_base_link">
     <visual>
       <geometry>
         <mesh filename="meshes/end_effectors/RS1-124.stl"/>
       </geometry>
+      <origin rpy="0 -1.5707 0" xyz="0 0 0"/>
       <material name="alpha_black"/>
     </visual>
     <inertial>
@@ -245,17 +255,17 @@
     </inertial>
   </link>
   
-  <joint name="alpha_standard_jaws_base_joint" type="fixed">
+  <joint name="standard_jaws_base_joint" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 0"/>
-    <parent link="alpha_ee_base_link"/>
-    <child link="alpha_standard_jaws_base_link"/>
+    <parent link="ee_base_link"/>
+    <child link="standard_jaws_base_link"/>
   </joint>
 
-  <!-- Gripper 130 -->
-  <link name="alpha_standard_jaws_rs1_130_link">
+  <!-- Gripper finger RS1-130 -->
+  <link name="standard_jaws_rs1_130_link">
     <visual>
       <geometry>
-        <mesh filename="meshes/end_effectors/RS1-130.stl"/>
+        <mesh filename="meshes/end_effectors/RS1-130.dae"/>
       </geometry>
       <material name="alpha_black"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -273,21 +283,21 @@
     </inertial>
   </link>
   
-  <joint name="alpha_standard_jaws_rs1_130_joint" type="revolute">
+  <joint name="standard_jaws_rs1_130_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 0.0155 0.0069"/>
-    <parent link="alpha_standard_jaws_base_link"/>
-    <child link="alpha_standard_jaws_rs1_130_link"/>
+    <parent link="standard_jaws_base_link"/>
+    <child link="standard_jaws_rs1_130_link"/>
     <axis xyz="-1 0 0"/>
     <limit effort="10" lower="0" upper="0.5" velocity="10"/>
     <dynamics damping="0.1" friction="0.05"/>
-    <mimic joint="joint_5" multiplier="51" offset="0"/>
+    <mimic joint="joint_5" multiplier="41.67" offset="0"/>
   </joint>
 
-  <!-- Gripper 139 -->
-  <link name="alpha_standard_jaws_rs1_139_link">
+  <!-- Gripper finger RS1-139 -->
+  <link name="standard_jaws_rs1_139_link">
     <visual>
       <geometry>
-        <mesh filename="meshes/end_effectors/RS1-139.stl"/>
+        <mesh filename="meshes//end_effectors/RS1-139.dae"/>
       </geometry>
       <material name="alpha_black"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -305,18 +315,18 @@
     </inertial>
   </link>
   
-  <joint name="alpha_standard_jaws_rs1_139_joint" type="revolute">
+  <joint name="standard_jaws_rs1_139_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 -0.0155 0.0069"/>
-    <parent link="alpha_standard_jaws_base_link"/>
-    <child link="alpha_standard_jaws_rs1_139_link"/>
+    <parent link="standard_jaws_base_link"/>
+    <child link="standard_jaws_rs1_139_link"/>
     <axis xyz="1 0 0"/>
     <limit effort="10" lower="0" upper="0.5" velocity="10"/>
     <dynamics damping="0.1" friction="0.05"/>
-    <mimic joint="alpha_standard_jaws_rs1_130_joint" multiplier="1" offset="0"/>
+    <mimic joint="standard_jaws_rs1_130_joint" multiplier="1" offset="0"/>
   </joint>
 
   <!-- Tool Center Point (TCP) -->
-  <link name="alpha_tcp">
+  <link name="tcp">
     <inertial>
       <mass value="0.001"/>
       <origin xyz="0 0 0"/>
@@ -324,10 +334,10 @@
     </inertial>
   </link>
   
-  <joint name="alpha_tcp_joint" type="fixed">
+  <joint name="tcp_joint" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 0.09"/>
-    <parent link="alpha_standard_jaws_base_link"/>
-    <child link="alpha_tcp"/>
+    <parent link="standard_jaws_base_link"/>
+    <child link="tcp"/>
   </joint>
 
 </robot>
