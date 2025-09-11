@@ -43,11 +43,11 @@ class AlphaRobotEnv(gym.Env):
         
         # 关节限制（来自alpha_joint_lim_urdf.yaml）
         self.joint_limits = {
-            'joint_1': {'lower': 0.032, 'upper': 6.02, 'effort': 54.36, 'velocity': 2.0},
-            'joint_2': {'lower': 0.0174533, 'upper': 3.40339, 'effort': 54.36, 'velocity': 2.0},
-            'joint_3': {'lower': 0.0174533, 'upper': 3.40339, 'effort': 47.112, 'velocity': 2.0},
-            'joint_4': {'lower': -3.14159, 'upper': 3.14159, 'effort': 33.069, 'velocity': 2.0},
-            'joint_5': {'lower': 0.0013, 'upper': 0.0133, 'effort': 28.992, 'velocity': 1.0} # 夹爪关节 open and close
+            'joint_1': {'lower': -3.054, 'upper': 3.054, 'effort': 15.0, 'velocity': 1.745},
+            'joint_2': {'lower': -1.745, 'upper': 1.745, 'effort': 20.0, 'velocity': 1.745},
+            'joint_3': {'lower': -1.618, 'upper': 1.618, 'effort': 18.0, 'velocity': 1.745},
+            'joint_4': {'lower': -0.785, 'upper': 0.785, 'effort': 12.0, 'velocity': 2.094},
+            'joint_5': {'lower': 0.0013, 'upper': 0.0133, 'effort': 600.0, 'velocity': 0.05} # 夹爪关节 open and close
         }
         
         # 安全参数
@@ -58,11 +58,11 @@ class AlphaRobotEnv(gym.Env):
         
         # 初始关节位置（安全的中间位置）
         self.initial_joint_positions = [
-            3.0,    # joint_1: 基座旋转（中间位置）
-            3.0,    # joint_2: 肩部（稍微抬起）
-            1.0,    # joint_3: 肘部（弯曲）
+            0.0,    # joint_1: 基座旋转（中间位置）
+            0.0,    # joint_2: 肩部（稍微抬起）
+            0.0,    # joint_3: 肘部（弯曲）
             0.0,    # joint_4: 腕部旋转（中间）
-            0.01,   # joint_5: 夹爪（微开）
+            0.001,   # joint_5: 夹爪（微开）
         ]
         
         # 连接PyBullet
@@ -159,7 +159,7 @@ class AlphaRobotEnv(gym.Env):
             
         robot_id = p.loadURDF(
             robot_path,
-            basePosition=[0, 0, 0.02],
+            basePosition=[0, 0, 0.2],
             useFixedBase=True,
             flags=p.URDF_USE_SELF_COLLISION | p.URDF_USE_SELF_COLLISION_EXCLUDE_PARENT
         )
