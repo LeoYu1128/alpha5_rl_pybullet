@@ -1,0 +1,340 @@
+_current_progress_remaining:
+    value: 1
+_custom_logger:
+    value: "False"
+_episode_num:
+    value: 0
+_last_episode_starts:
+    value: '[ True  True  True  True]'
+_last_obs:
+    value: |-
+        [[-5.3548598e-01  1.0426326e+00 -4.9234375e-01 -1.0078921e+00
+          -4.6270358e-04 -1.8400021e-03  1.2836235e-03  4.2755208e-03
+           8.4030902e-01  2.5417450e-01 -1.6525619e+00 -1.1145084e+00
+          -1.3937435e+00 -1.1362809e+00]
+         [ 1.3244388e+00 -1.4553304e+00 -8.4410334e-01 -9.6936178e-01
+           1.2714154e-03 -1.8748936e-03  1.2836235e-03 -2.1840769e-03
+          -1.4952836e+00 -1.0300424e-01  9.2442954e-01  1.5048975e+00
+          -4.7967348e-01  4.9681309e-01]
+         [ 5.1301944e-01 -3.8921747e-01 -3.6759004e-01  7.8521699e-01
+           1.5077571e-03 -3.1192272e-03 -3.8509991e-03 -2.5501580e-03
+          -3.1249353e-01  1.2862052e+00  5.9483421e-01  2.2677825e-01
+           1.1234401e+00 -7.3476452e-01]
+         [-1.3019171e+00  8.0198199e-01  1.7042813e+00  1.1920779e+00
+          -2.3165869e-03  6.8344553e-03  1.2836235e-03  4.5897497e-04
+           9.6778893e-01 -1.4373795e+00  1.3381733e-01 -6.1701763e-01
+           7.4997663e-01  1.3747033e+00]]
+_last_original_obs:
+    value: |-
+        [[ 4.8756786e-03  9.5484716e-01  2.7889588e-01 -7.1719132e-02
+          -8.2006809e-06  7.4718905e-06  0.0000000e+00  3.4407651e-05
+           2.6792729e-01  4.7020754e-03  1.7729858e-01  1.5635865e-02
+          -2.5899890e-01  2.0555119e-01]
+         [ 5.9046417e-01 -4.3976718e-01  2.2859921e-01 -6.7099206e-02
+           4.7155004e-07  7.2973994e-06  0.0000000e+00  2.1034871e-06
+           1.1326005e-01 -3.1978588e-03  3.0597007e-01  1.2180900e-01
+          -8.9507662e-02  2.9948771e-01]
+         [ 3.3499265e-01  1.5544435e-01  2.9673392e-01  1.4328106e-01
+           1.6534816e-06  1.0745151e-06 -2.5677989e-05  2.7273126e-07
+           1.9158658e-01  2.7528109e-02  2.8951308e-01  7.0002623e-02
+           2.0774931e-01  2.2864665e-01]
+         [-2.3643154e-01  8.2049179e-01  5.9298241e-01  1.9206513e-01
+          -1.7471846e-05  5.0852654e-05  0.0000000e+00  1.5321273e-05
+           2.7636924e-01 -3.2711029e-02  2.6649410e-01  3.5800800e-02
+           1.3849993e-01  3.4998447e-01]]
+_logger:
+    value: <stable_baselines3.common.logger.Logger object at 0x000001C039E9A910>
+_n_updates:
+    value: 0
+_num_timesteps_at_start:
+    value: 0
+_stats_window_size:
+    value: 100
+_total_timesteps:
+    value: 300000
+_vec_normalize_env:
+    value: <stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x000001C01D97D650>
+_wandb:
+    value:
+        cli_version: 0.22.0
+        code_path: code/train_v5_success.py
+        e:
+            rmi3motxolllldduaw185p9ytzv6yfe0:
+                codePath: train_v5_success.py
+                codePathLocal: train_v5_success.py
+                cpu_count: 6
+                cpu_count_logical: 12
+                disk:
+                    /:
+                        total: "1000203087872"
+                        used: "364951298048"
+                email: leoyu11285@gmail.com
+                executable: D:\thesis\venvs\alpha5_rl_env\Scripts\python.exe
+                git:
+                    commit: b2e070159e03900a56606b05b85fec2ac2cde633
+                    remote: https://github.com/LeoYu1128/alpha5_rl_pybullet.git
+                host: leoyu
+                memory:
+                    total: "16955232256"
+                os: Windows-10-10.0.26100-SP0
+                program: D:\thesis\alpha5_rl_pybullet\train_v5_success.py
+                python: CPython 3.11.9
+                root: experiments\SAC_300000steps_20250927_095956
+                startedAt: "2025-09-26T23:59:57.591669Z"
+                writerId: rmi3motxolllldduaw185p9ytzv6yfe0
+        m: []
+        python_version: 3.11.9
+        t:
+            "1":
+                - 1
+            "2":
+                - 1
+            "3":
+                - 1
+                - 3
+                - 13
+                - 16
+                - 22
+                - 35
+            "4": 3.11.9
+            "5": 0.22.0
+            "8":
+                - 3
+            "12": 0.22.0
+            "13": windows-amd64
+action_noise:
+    value: None
+action_space:
+    value: Box(-1.0, 1.0, (4,), float32)
+actor:
+    value: |-
+        Actor(
+          (features_extractor): FlattenExtractor(
+            (flatten): Flatten(start_dim=1, end_dim=-1)
+          )
+          (latent_pi): Sequential(
+            (0): Linear(in_features=14, out_features=256, bias=True)
+            (1): ReLU()
+            (2): Linear(in_features=256, out_features=256, bias=True)
+            (3): ReLU()
+            (4): Linear(in_features=256, out_features=256, bias=True)
+            (5): ReLU()
+          )
+          (mu): Sequential(
+            (0): Linear(in_features=256, out_features=4, bias=True)
+            (1): Hardtanh(min_val=-2.0, max_val=2.0)
+          )
+        )
+algo:
+    value: SAC
+algorithm:
+    value: SAC
+batch_norm_stats:
+    value: '[]'
+batch_norm_stats_target:
+    value: '[]'
+batch_size:
+    value: 512
+buffer_size:
+    value: 500000
+critic:
+    value: |-
+        ContinuousCritic(
+          (features_extractor): FlattenExtractor(
+            (flatten): Flatten(start_dim=1, end_dim=-1)
+          )
+          (qf0): Sequential(
+            (0): Linear(in_features=18, out_features=256, bias=True)
+            (1): ReLU()
+            (2): Linear(in_features=256, out_features=256, bias=True)
+            (3): ReLU()
+            (4): Linear(in_features=256, out_features=256, bias=True)
+            (5): ReLU()
+            (6): Linear(in_features=256, out_features=1, bias=True)
+          )
+          (qf1): Sequential(
+            (0): Linear(in_features=18, out_features=256, bias=True)
+            (1): ReLU()
+            (2): Linear(in_features=256, out_features=256, bias=True)
+            (3): ReLU()
+            (4): Linear(in_features=256, out_features=256, bias=True)
+            (5): ReLU()
+            (6): Linear(in_features=256, out_features=1, bias=True)
+          )
+        )
+critic_target:
+    value: |-
+        ContinuousCritic(
+          (features_extractor): FlattenExtractor(
+            (flatten): Flatten(start_dim=1, end_dim=-1)
+          )
+          (qf0): Sequential(
+            (0): Linear(in_features=18, out_features=256, bias=True)
+            (1): ReLU()
+            (2): Linear(in_features=256, out_features=256, bias=True)
+            (3): ReLU()
+            (4): Linear(in_features=256, out_features=256, bias=True)
+            (5): ReLU()
+            (6): Linear(in_features=256, out_features=1, bias=True)
+          )
+          (qf1): Sequential(
+            (0): Linear(in_features=18, out_features=256, bias=True)
+            (1): ReLU()
+            (2): Linear(in_features=256, out_features=256, bias=True)
+            (3): ReLU()
+            (4): Linear(in_features=256, out_features=256, bias=True)
+            (5): ReLU()
+            (6): Linear(in_features=256, out_features=1, bias=True)
+          )
+        )
+device:
+    value: cpu
+ent_coef:
+    value: auto_0.2
+ent_coef_optimizer:
+    value: |-
+        Adam (
+        Parameter Group 0
+            amsgrad: False
+            betas: (0.9, 0.999)
+            capturable: False
+            decoupled_weight_decay: False
+            differentiable: False
+            eps: 1e-08
+            foreach: None
+            fused: None
+            lr: 0.0003
+            maximize: False
+            weight_decay: 0
+        )
+env:
+    value: <stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x000001C01D97D650>
+ep_info_buffer:
+    value: deque([], maxlen=100)
+ep_success_buffer:
+    value: deque([], maxlen=100)
+gamma:
+    value: 0.98
+gradient_steps:
+    value: 64
+learning_rate:
+    value: 0.0003
+learning_starts:
+    value: 10000
+log_ent_coef:
+    value: tensor([-1.6094], requires_grad=True)
+lr_schedule:
+    value: FloatSchedule(ConstantSchedule(val=0.0003))
+n_envs:
+    value: 4
+n_steps:
+    value: 1
+num_envs:
+    value: 4
+num_timesteps:
+    value: 0
+observation_space:
+    value: Box(-inf, inf, (14,), float32)
+optimize_memory_usage:
+    value: "False"
+policy:
+    value: |-
+        SACPolicy(
+          (actor): Actor(
+            (features_extractor): FlattenExtractor(
+              (flatten): Flatten(start_dim=1, end_dim=-1)
+            )
+            (latent_pi): Sequential(
+              (0): Linear(in_features=14, out_features=256, bias=True)
+              (1): ReLU()
+              (2): Linear(in_features=256, out_features=256, bias=True)
+              (3): ReLU()
+              (4): Linear(in_features=256, out_features=256, bias=True)
+              (5): ReLU()
+            )
+            (mu): Sequential(
+              (0): Linear(in_features=256, out_features=4, bias=True)
+              (1): Hardtanh(min_val=-2.0, max_val=2.0)
+            )
+          )
+          (critic): ContinuousCritic(
+            (features_extractor): FlattenExtractor(
+              (flatten): Flatten(start_dim=1, end_dim=-1)
+            )
+            (qf0): Sequential(
+              (0): Linear(in_features=18, out_features=256, bias=True)
+              (1): ReLU()
+              (2): Linear(in_features=256, out_features=256, bias=True)
+              (3): ReLU()
+              (4): Linear(in_features=256, out_features=256, bias=True)
+              (5): ReLU()
+              (6): Linear(in_features=256, out_features=1, bias=True)
+            )
+            (qf1): Sequential(
+              (0): Linear(in_features=18, out_features=256, bias=True)
+              (1): ReLU()
+              (2): Linear(in_features=256, out_features=256, bias=True)
+              (3): ReLU()
+              (4): Linear(in_features=256, out_features=256, bias=True)
+              (5): ReLU()
+              (6): Linear(in_features=256, out_features=1, bias=True)
+            )
+          )
+          (critic_target): ContinuousCritic(
+            (features_extractor): FlattenExtractor(
+              (flatten): Flatten(start_dim=1, end_dim=-1)
+            )
+            (qf0): Sequential(
+              (0): Linear(in_features=18, out_features=256, bias=True)
+              (1): ReLU()
+              (2): Linear(in_features=256, out_features=256, bias=True)
+              (3): ReLU()
+              (4): Linear(in_features=256, out_features=256, bias=True)
+              (5): ReLU()
+              (6): Linear(in_features=256, out_features=1, bias=True)
+            )
+            (qf1): Sequential(
+              (0): Linear(in_features=18, out_features=256, bias=True)
+              (1): ReLU()
+              (2): Linear(in_features=256, out_features=256, bias=True)
+              (3): ReLU()
+              (4): Linear(in_features=256, out_features=256, bias=True)
+              (5): ReLU()
+              (6): Linear(in_features=256, out_features=1, bias=True)
+            )
+          )
+        )
+policy_class:
+    value: <class 'stable_baselines3.sac.policies.SACPolicy'>
+policy_kwargs:
+    value: '{''net_arch'': [256, 256, 256], ''use_sde'': True}'
+replay_buffer:
+    value: <stable_baselines3.common.buffers.ReplayBuffer object at 0x000001C01D60CCD0>
+replay_buffer_class:
+    value: <class 'stable_baselines3.common.buffers.ReplayBuffer'>
+replay_buffer_kwargs:
+    value: '{}'
+sde_sample_freq:
+    value: 4
+seed:
+    value: None
+start_time:
+    value: 1758931209755916800
+target_entropy:
+    value: -4
+target_update_interval:
+    value: 1
+tau:
+    value: 0.005
+tensorboard_log:
+    value: None
+total_timesteps:
+    value: 300000
+train_freq:
+    value: 'TrainFreq(frequency=16, unit=<TrainFrequencyUnit.STEP: ''step''>)'
+use_sde:
+    value: "True"
+use_sde_at_warmup:
+    value: "False"
+verbose:
+    value: 1

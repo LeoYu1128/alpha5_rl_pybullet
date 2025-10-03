@@ -1,0 +1,9 @@
+{
+  "algorithm": "SAC",
+  "total_timesteps": 300000,
+  "training_time": 11422.259400606155,
+  "final_mean_reward": -5.4227021,
+  "final_std_reward": 14.03492546354873,
+  "experiment_name": "SAC_300000steps_20250926_105420",
+  "model_path": "experiments\\SAC_300000steps_20250926_105420\\models\\SAC_final"
+}

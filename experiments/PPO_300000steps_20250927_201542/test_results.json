@@ -1,0 +1,17 @@
+{
+  "total_episodes": 5,
+  "average_reward": -133.68714904785156,
+  "success_rate": 0.2,
+  "average_distance": 0.419253159314394,
+  "average_length": 321.6,
+  "gif_count": 5,
+  "detailed_results": {
+    "episodes": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rewards": [
+      

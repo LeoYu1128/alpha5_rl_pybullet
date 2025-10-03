@@ -1,0 +1,1500 @@
+2025-09-27 15:07:43,779 INFO    MainThread:2264 [wandb_setup.py:_flush():81] Current SDK version is 0.22.0
+2025-09-27 15:07:43,780 INFO    MainThread:2264 [wandb_setup.py:_flush():81] Configure stats pid to 2264
+2025-09-27 15:07:43,780 INFO    MainThread:2264 [wandb_setup.py:_flush():81] Loading settings from C:\Users\leoyu\.config\wandb\settings
+2025-09-27 15:07:43,780 INFO    MainThread:2264 [wandb_setup.py:_flush():81] Loading settings from D:\thesis\alpha5_rl_pybullet\wandb\settings
+2025-09-27 15:07:43,780 INFO    MainThread:2264 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2025-09-27 15:07:43,780 INFO    MainThread:2264 [wandb_init.py:setup_run_log_directory():686] Logging user logs to experiments\SAC_100000steps_20250927_150742\wandb\run-20250927_150743-s41m2veb\logs\debug.log
+2025-09-27 15:07:43,782 INFO    MainThread:2264 [wandb_init.py:setup_run_log_directory():687] Logging internal logs to experiments\SAC_100000steps_20250927_150742\wandb\run-20250927_150743-s41m2veb\logs\debug-internal.log
+2025-09-27 15:07:43,786 INFO    MainThread:2264 [wandb_init.py:init():813] calling init triggers
+2025-09-27 15:07:43,786 INFO    MainThread:2264 [wandb_init.py:init():818] wandb.init called with sweep_config: {}
+config: {'algorithm': 'SAC', 'total_timesteps': 100000, 'num_envs': 1, '_wandb': {'code_path': 'code/train_v5_success.py'}}
+2025-09-27 15:07:43,786 INFO    MainThread:2264 [wandb_init.py:init():861] starting backend
+2025-09-27 15:07:46,021 INFO    MainThread:2264 [wandb_init.py:init():864] sending inform_init request
+2025-09-27 15:07:46,033 INFO    MainThread:2264 [wandb_init.py:init():872] backend started and connected
+2025-09-27 15:07:46,035 INFO    MainThread:2264 [wandb_init.py:init():942] updated telemetry
+2025-09-27 15:07:46,080 INFO    MainThread:2264 [wandb_init.py:init():966] communicating run to backend with 90.0 second timeout
+2025-09-27 15:07:46,827 INFO    MainThread:2264 [wandb_init.py:init():1017] starting run threads in backend
+2025-09-27 15:07:46,910 INFO    MainThread:2264 [wandb_run.py:_console_start():2506] atexit reg
+2025-09-27 15:07:46,910 INFO    MainThread:2264 [wandb_run.py:_redirect():2354] redirect: wrap_raw
+2025-09-27 15:07:46,910 INFO    MainThread:2264 [wandb_run.py:_redirect():2423] Wrapping output streams.
+2025-09-27 15:07:46,911 INFO    MainThread:2264 [wandb_run.py:_redirect():2446] Redirects installed.
+2025-09-27 15:07:46,913 INFO    MainThread:2264 [wandb_init.py:init():1057] run started, returning control to user process
+2025-09-27 15:07:50,006 INFO    MainThread:2264 [wandb_run.py:_tensorboard_callback():1601] tensorboard callback: experiments\SAC_100000steps_20250927_150742\logs\tensorboard\SAC_1, True
+2025-09-27 15:07:50,016 INFO    MainThread:2264 [wandb_watch.py:_watch():68] Watching
+2025-09-27 15:07:50,019 INFO    MainThread:2264 [wandb_run.py:_config_callback():1392] config_cb None None {'algo': 'SAC', 'policy_class': "<class 'stable_baselines3.sac.policies.SACPolicy'>", 'device': 'cpu', 'verbose': 1, 'policy_kwargs': "{'net_arch': [256, 256, 256], 'use_sde': True}", 'num_timesteps': 0, '_total_timesteps': 100000, '_num_timesteps_at_start': 0, 'seed': 'None', 'action_noise': 'None', 'start_time': 1758949669998497200, 'learning_rate': 0.0003, 'tensorboard_log': 'experiments\\SAC_100000steps_20250927_150742\\logs\\tensorboard', '_last_obs': '[[-6.5411595e-03  4.8680181e-04 -6.1811176e-03  7.1352127e-04\n   3.5646719e-10 -2.8132638e-07  0.0000000e+00  2.1627163e-10\n   1.3310505e-03 -8.0976824e-05  7.1188621e-04  2.7047747e-03\n  -1.7722244e-03  3.1642152e-03]]', '_last_episode_starts': '[ True]', '_last_original_obs': '[[-8.6486816e-01  4.8742838e-02 -7.8639007e-01  7.1541607e-02\n   3.5650285e-08 -2.8135451e-05  0.0000000e+00  2.1629326e-08\n   1.3431349e-01 -8.0987578e-03  7.1376830e-02  2.8097761e-01\n  -1.8009086e-01  3.3359364e-01]]', '_episode_num': 0, 'use_sde': 'True', 'sde_sample_freq': 4, '_current_progress_remaining': 1.0, '_stats_window_size': 100, 'ep_info_buffer': 'deque([], maxlen=100)', 'ep_success_buffer': 'deque([], maxlen=100)', '_n_updates': 0, '_custom_logger': 'False', 'env': '<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x0000020234CC2A50>', '_vec_normalize_env': '<stable_baselines3.common.vec_env.vec_normalize.VecNormalize object at 0x0000020234CC2A50>', 'observation_space': 'Box(-inf, inf, (14,), float32)', 'action_space': 'Box(-1.0, 1.0, (4,), float32)', 'n_envs': 1, 'buffer_size': 500000, 'batch_size': 512, 'learning_starts': 10000, 'tau': 0.005, 'gamma': 0.98, 'gradient_steps': 64, 'optimize_memory_usage': 'False', 'replay_buffer': '<stable_baselines3.common.buffers.ReplayBuffer object at 0x0000020234D4A290>', 'replay_buffer_class': "<class 'stable_baselines3.common.buffers.ReplayBuffer'>", 'replay_buffer_kwargs': '{}', 'n_steps': 1, 'train_freq': "TrainFreq(frequency=64, unit=<TrainFrequencyUnit.STEP: 'step'>)", 'use_sde_at_warmup': 'False', 'target_entropy': -4.0, 'log_ent_coef': 'tensor([-1.6094], requires_grad=True)', 'ent_coef': 'auto_0.2', 'target_update_interval': 1, 'ent_coef_optimizer': 'Adam (\nParameter Group 0\n    amsgrad: False\n    betas: (0.9, 0.999)\n    capturable: False\n    decoupled_weight_decay: False\n    differentiable: False\n    eps: 1e-08\n    foreach: None\n    fused: None\n    lr: 0.0003\n    maximize: False\n    weight_decay: 0\n)', 'lr_schedule': 'FloatSchedule(ConstantSchedule(val=0.0003))', 'policy': 'SACPolicy(\n  (actor): Actor(\n    (features_extractor): FlattenExtractor(\n      (flatten): Flatten(start_dim=1, end_dim=-1)\n    )\n    (latent_pi): Sequential(\n      (0): Linear(in_features=14, out_features=256, bias=True)\n      (1): ReLU()\n      (2): Linear(in_features=256, out_features=256, bias=True)\n      (3): ReLU()\n      (4): Linear(in_features=256, out_features=256, bias=True)\n      (5): ReLU()\n    )\n    (mu): Sequential(\n      (0): Linear(in_features=256, out_features=4, bias=True)\n      (1): Hardtanh(min_val=-2.0, max_val=2.0)\n    )\n  )\n  (critic): ContinuousCritic(\n    (features_extractor): FlattenExtractor(\n      (flatten): Flatten(start_dim=1, end_dim=-1)\n    )\n    (qf0): Sequential(\n      (0): Linear(in_features=18, out_features=256, bias=True)\n      (1): ReLU()\n      (2): Linear(in_features=256, out_features=256, bias=True)\n      (3): ReLU()\n      (4): Linear(in_features=256, out_features=256, bias=True)\n      (5): ReLU()\n      (6): Linear(in_features=256, out_features=1, bias=True)\n    )\n    (qf1): Sequential(\n      (0): Linear(in_features=18, out_features=256, bias=True)\n      (1): ReLU()\n      (2): Linear(in_features=256, out_features=256, bias=True)\n      (3): ReLU()\n      (4): Linear(in_features=256, out_features=256, bias=True)\n      (5): ReLU()\n      (6): Linear(in_features=256, out_features=1, bias=True)\n    )\n  )\n  (critic_target): ContinuousCritic(\n    (features_extractor): FlattenExtractor(\n      (flatten): Flatten(start_dim=1, end_dim=-1)\n    )\n    (qf0): Sequential(\n      (0): Linear(in_features=18, out_features=256, bias=True)\n      (1): ReLU()\n      (2): Linear(in_features=256, out_features=256, bias=True)\n      (3): ReLU()\n      (4): Linear(in_features=256, out_features=256, bias=True)\n      (5): ReLU()\n      (6): Linear(in_features=256, out_features=1, bias=True)\n    )\n    (qf1): Sequential(\n      (0): Linear(in_features=18, out_features=256, bias=True)\n      (1): ReLU()\n      (2): Linear(in_features=256, out_features=256, bias=True)\n      (3): ReLU()\n      (4): Linear(in_features=256, out_features=256, bias=True)\n      (5): ReLU()\n      (6): Linear(in_features=256, out_features=1, bias=True)\n    )\n  )\n)', 'actor': 'Actor(\n  (features_extractor): FlattenExtractor(\n    (flatten): Flatten(start_dim=1, end_dim=-1)\n  )\n  (latent_pi): Sequential(\n    (0): Linear(in_features=14, out_features=256, bias=True)\n    (1): ReLU()\n    (2): Linear(in_features=256, out_features=256, bias=True)\n    (3): ReLU()\n    (4): Linear(in_features=256, out_features=256, bias=True)\n    (5): ReLU()\n  )\n  (mu): Sequential(\n    (0): Linear(in_features=256, out_features=4, bias=True)\n    (1): Hardtanh(min_val=-2.0, max_val=2.0)\n  )\n)', 'critic': 'ContinuousCritic(\n  (features_extractor): FlattenExtractor(\n    (flatten): Flatten(start_dim=1, end_dim=-1)\n  )\n  (qf0): Sequential(\n    (0): Linear(in_features=18, out_features=256, bias=True)\n    (1): ReLU()\n    (2): Linear(in_features=256, out_features=256, bias=True)\n    (3): ReLU()\n    (4): Linear(in_features=256, out_features=256, bias=True)\n    (5): ReLU()\n    (6): Linear(in_features=256, out_features=1, bias=True)\n  )\n  (qf1): Sequential(\n    (0): Linear(in_features=18, out_features=256, bias=True)\n    (1): ReLU()\n    (2): Linear(in_features=256, out_features=256, bias=True)\n    (3): ReLU()\n    (4): Linear(in_features=256, out_features=256, bias=True)\n    (5): ReLU()\n    (6): Linear(in_features=256, out_features=1, bias=True)\n  )\n)', 'critic_target': 'ContinuousCritic(\n  (features_extractor): FlattenExtractor(\n    (flatten): Flatten(start_dim=1, end_dim=-1)\n  )\n  (qf0): Sequential(\n    (0): Linear(in_features=18, out_features=256, bias=True)\n    (1): ReLU()\n    (2): Linear(in_features=256, out_features=256, bias=True)\n    (3): ReLU()\n    (4): Linear(in_features=256, out_features=256, bias=True)\n    (5): ReLU()\n    (6): Linear(in_features=256, out_features=1, bias=True)\n  )\n  (qf1): Sequential(\n    (0): Linear(in_features=18, out_features=256, bias=True)\n    (1): ReLU()\n    (2): Linear(in_features=256, out_features=256, bias=True)\n    (3): ReLU()\n    (4): Linear(in_features=256, out_features=256, bias=True)\n    (5): ReLU()\n    (6): Linear(in_features=256, out_features=1, bias=True)\n  )\n)', 'batch_norm_stats': '[]', 'batch_norm_stats_target': '[]', '_logger': '<stable_baselines3.common.logger.Logger object at 0x0000020247838710>'}
+2025-09-27 16:07:47,909 INFO    wandb-AsyncioManager-main:2264 [service_client.py:_forward_responses():84] Reached EOF.
+2025-09-27 16:07:47,923 INFO    wandb-AsyncioManager-main:2264 [mailbox.py:close():137] Closing mailbox, abandoning 1 handles.
+2025-09-27 16:07:48,010 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,112 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,219 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,228 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,229 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,248 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,248 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,249 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,249 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,286 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,287 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,287 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,288 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,288 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,289 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,289 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,289 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,360 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,361 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,361 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,362 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,362 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,362 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,363 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,363 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,363 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,364 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,364 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,364 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,365 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,365 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,365 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,366 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,519 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,519 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,522 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,522 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,522 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,523 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,523 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,523 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,524 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,524 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,524 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,525 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,525 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,526 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,526 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,526 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,527 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,527 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,527 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,528 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,528 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,530 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,530 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,530 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,531 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,531 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,531 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,532 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,532 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,532 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,533 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,533 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,533 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,862 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,862 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,862 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,863 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,867 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,868 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,868 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,868 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,869 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,869 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,869 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,870 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,870 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,871 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,871 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,871 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,872 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,872 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,872 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,872 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,873 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,873 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,873 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,875 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,875 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,875 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,876 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,876 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,876 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,877 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,877 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,877 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,878 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,878 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,878 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,878 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,878 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,879 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,879 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,880 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,880 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,880 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,880 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,881 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,881 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,881 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,882 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,882 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,882 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,883 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,883 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,883 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,884 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,884 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,884 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,885 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,885 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,886 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,886 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,886 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,887 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,887 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,887 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,887 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,888 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,888 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,889 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-09-27 16:07:48,922 ERROR   wandb-AsyncioManager-main:2264 [asyncio_manager.py:fn_wrap_exceptions():183] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\lib\service\service_client.py", line 65, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost

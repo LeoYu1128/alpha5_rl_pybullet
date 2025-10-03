@@ -1,0 +1,16 @@
+{"time":"2025-09-27T15:07:46.0359083+10:00","level":"INFO","msg":"stream: starting","core version":"0.22.0"}
+{"time":"2025-09-27T15:07:46.4619456+10:00","level":"INFO","msg":"stream: created new stream","id":"s41m2veb"}
+{"time":"2025-09-27T15:07:46.4619456+10:00","level":"INFO","msg":"stream: started","id":"s41m2veb"}
+{"time":"2025-09-27T15:07:46.4619456+10:00","level":"INFO","msg":"writer: started","stream_id":"s41m2veb"}
+{"time":"2025-09-27T15:07:46.4619456+10:00","level":"INFO","msg":"sender: started","stream_id":"s41m2veb"}
+{"time":"2025-09-27T15:07:46.4619456+10:00","level":"INFO","msg":"handler: started","stream_id":"s41m2veb"}
+{"time":"2025-09-27T15:07:46.8301162+10:00","level":"ERROR","msg":"git repo not found","error":"repository does not exist"}
+{"time":"2025-09-27T15:08:00.0068018+10:00","level":"WARN","msg":"tensorboard: no root directory","error":"timed out after 10s"}
+{"time":"2025-09-27T15:08:00.0068018+10:00","level":"INFO","msg":"tensorboard: tracking new log directory","rootDir":{},"logDir":"LocalOrCloudPath(LocalPath=\"D:\\\\thesis\\\\alpha5_rl_pybullet\\\\experiments\\\\SAC_100000steps_20250927_150742\\\\logs\\\\tensorboard\\\\SAC_1\")","namespace":""}
+{"time":"2025-09-27T15:08:00.0073052+10:00","level":"INFO","msg":"tensorboard: saving file","fileLocation":"D:\\thesis\\alpha5_rl_pybullet\\experiments\\SAC_100000steps_20250927_150742\\logs\\tensorboard\\SAC_1\\events.out.tfevents.1758949670.leoyu.2264.0","runPath":"experiments/SAC_100000steps_20250927_150742/logs/tensorboard/SAC_1/events.out.tfevents.1758949670.leoyu.2264.0"}
+{"time":"2025-09-27T15:08:00.0104192+10:00","level":"ERROR","msg":"tensorboard: error creating symlink","target":"D:\\thesis\\alpha5_rl_pybullet\\experiments\\SAC_100000steps_20250927_150742\\logs\\tensorboard\\SAC_1\\events.out.tfevents.1758949670.leoyu.2264.0","symlink":"experiments\\SAC_100000steps_20250927_150742\\wandb\\run-20250927_150743-s41m2veb\\files\\experiments\\SAC_100000steps_20250927_150742\\logs\\tensorboard\\SAC_1\\events.out.tfevents.1758949670.leoyu.2264.0","error":"symlink D:\\thesis\\alpha5_rl_pybullet\\experiments\\SAC_100000steps_20250927_150742\\logs\\tensorboard\\SAC_1\\events.out.tfevents.1758949670.leoyu.2264.0 experiments\\SAC_100000steps_20250927_150742\\wandb\\run-20250927_150743-s41m2veb\\files\\experiments\\SAC_100000steps_20250927_150742\\logs\\tensorboard\\SAC_1\\events.out.tfevents.1758949670.leoyu.2264.0: A required privilege is not held by the client."}
+{"time":"2025-09-27T16:07:48.0001252+10:00","level":"INFO","msg":"stream: closing","id":"s41m2veb"}
+{"time":"2025-09-27T16:07:49.4738416+10:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-27T16:07:49.8351311+10:00","level":"INFO","msg":"handler: closed","stream_id":"s41m2veb"}
+{"time":"2025-09-27T16:07:49.8351311+10:00","level":"INFO","msg":"sender: closed","stream_id":"s41m2veb"}
+{"time":"2025-09-27T16:07:49.8351311+10:00","level":"INFO","msg":"stream: closed","id":"s41m2veb"}

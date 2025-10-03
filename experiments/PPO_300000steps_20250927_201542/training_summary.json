@@ -1,0 +1,9 @@
+{
+  "algorithm": "PPO",
+  "total_timesteps": 300000,
+  "training_time": 693.55038189888,
+  "final_mean_reward": -166.8194698,
+  "final_std_reward": 55.37106470108352,
+  "experiment_name": "PPO_300000steps_20250927_201542",
+  "model_path": "experiments\\PPO_300000steps_20250927_201542\\models\\PPO_final"
+}

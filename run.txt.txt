@@ -1,0 +1,14 @@
+# 基本训练
+python train_alpha_reach.py --mode train --algorithm SAC --timesteps 300000
+
+# 指定参数训练
+python train_alpha_reach.py --mode train --algorithm SAC --timesteps 500000 --num_envs 8
+
+# 算法比较
+python train_alpha_reach.py --mode compare --timesteps 100000
+
+# 测试已训练模型
+python train_alpha_reach.py --mode test --model ./experiments/SAC_300000steps_20241225_143022/models/SAC_final --episodes 10
+
+# 可视化测试
+python train_alpha_reach.py --mode test --model path/to/model.zip --episodes 5

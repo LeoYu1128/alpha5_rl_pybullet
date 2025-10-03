@@ -1,0 +1,25 @@
+{
+  "algorithm": "PPO",
+  "timesteps": 300000,
+  "timestamp": "2025-09-26T17:35:55.218104",
+  "config": {
+    "policy": "MlpPolicy",
+    "learning_rate": 0.0003,
+    "n_steps": 512,
+    "batch_size": 128,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "clip_range": 0.2,
+    "ent_coef": 0.005,
+    "vf_coef": 0.5,
+    "max_grad_norm": 0.5,
+    "policy_kwargs": {
+      "net_arch": [
+        256,
+        256,
+        128
+      ]
+    },
+    "verbose": 1
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "total_episodes": 3,
+  "average_reward": -93.0004399617513,
+  "success_rate": 0.3333333333333333,
+  "average_distance": 0.18023987611134848,
+  "average_length": 344.0,
+  "gif_count": 3,
+  "detailed_results": {
+    "episodes": [
+      1,
+      2,
+      3
+    ],
+    "rewards": [
+      -52.17567443847656,
+      -83.80194854736328,
+      -143.02369689941406
+    ],
+    "success_rates": [
+      1,
+      0,
+      0
+    ],
+    "final_distances": [
+      0.04927453398704529,
+      0.15192922949790955,
+      0.3395158648490906
+    ],
+    "episode_lengths": [
+      232,
+      400,
+      400
+    ],
+    "gif_paths": [
+      "D:\\thesis\\alpha5_rl_pybullet\\gif_output\\videos\\episode_1.gif",
+      "D:\\thesis\\alpha5_rl_pybullet\\gif_output\\videos\\episode_2.gif",
+      "D:\\thesis\\alpha5_rl_pybullet\\gif_output\\videos\\episode_3.gif"
+    ]
+  }
+}

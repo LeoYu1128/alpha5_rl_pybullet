@@ -1,0 +1,180 @@
+检查环境...
+成功加载水下Alpha机械臂: alpha_description/urdf/alpha_robot_for_pybullet.urdf
+找到主要控制关节: 4个
+  [0] joint_1: [-3.07, 3.07] 弧度
+  [1] joint_2: [-1.75, 1.75] 弧度
+  [2] joint_3: [-1.61, 1.61] 弧度
+  [3] joint_4: [-0.79, 0.79] 弧度
+末端执行器索引: 11
+水下Alpha机械臂环境初始化完成
+动作空间: Box(-1.0, 1.0, (4,), float32)
+观察空间: (14,)
+水流速度: [-0.06306193 -0.03276532 -0.0106218 ]
+环境检查通过
+成功加载水下Alpha机械臂: alpha_description/urdf/alpha_robot_for_pybullet.urdf
+找到主要控制关节: 4个
+  [0] joint_1: [-3.07, 3.07] 弧度
+  [1] joint_2: [-1.75, 1.75] 弧度
+  [2] joint_3: [-1.61, 1.61] 弧度
+  [3] joint_4: [-0.79, 0.79] 弧度
+末端执行器索引: 11
+水下Alpha机械臂环境初始化完成
+动作空间: Box(-1.0, 1.0, (4,), float32)
+观察空间: (14,)
+水流速度: [-0.06233998  0.01563296 -0.02170902]
+成功加载水下Alpha机械臂: alpha_description/urdf/alpha_robot_for_pybullet.urdf
+找到主要控制关节: 4个
+  [0] joint_1: [-3.07, 3.07] 弧度
+  [1] joint_2: [-1.75, 1.75] 弧度
+  [2] joint_3: [-1.61, 1.61] 弧度
+  [3] joint_4: [-0.79, 0.79] 弧度
+末端执行器索引: 11
+水下Alpha机械臂环境初始化完成
+动作空间: Box(-1.0, 1.0, (4,), float32)
+观察空间: (14,)
+水流速度: [ 0.01677528  0.02392636 -0.02764873]
+成功加载水下Alpha机械臂: alpha_description/urdf/alpha_robot_for_pybullet.urdf
+找到主要控制关节: 4个
+  [0] joint_1: [-3.07, 3.07] 弧度
+  [1] joint_2: [-1.75, 1.75] 弧度
+  [2] joint_3: [-1.61, 1.61] 弧度
+  [3] joint_4: [-0.79, 0.79] 弧度
+末端执行器索引: 11
+水下Alpha机械臂环境初始化完成
+动作空间: Box(-1.0, 1.0, (4,), float32)
+观察空间: (14,)
+水流速度: [-0.03753768  0.00232481 -0.02436357]
+成功加载水下Alpha机械臂: alpha_description/urdf/alpha_robot_for_pybullet.urdf
+找到主要控制关节: 4个
+  [0] joint_1: [-3.07, 3.07] 弧度
+  [1] joint_2: [-1.75, 1.75] 弧度
+  [2] joint_3: [-1.61, 1.61] 弧度
+  [3] joint_4: [-0.79, 0.79] 弧度
+末端执行器索引: 11
+水下Alpha机械臂环境初始化完成
+动作空间: Box(-1.0, 1.0, (4,), float32)
+观察空间: (14,)
+水流速度: [-0.07678279  0.032894   -0.02971827]
+成功加载水下Alpha机械臂: alpha_description/urdf/alpha_robot_for_pybullet.urdf
+找到主要控制关节: 4个
+  [0] joint_1: [-3.07, 3.07] 弧度
+  [1] joint_2: [-1.75, 1.75] 弧度
+  [2] joint_3: [-1.61, 1.61] 弧度
+  [3] joint_4: [-0.79, 0.79] 弧度
+末端执行器索引: 11
+水下Alpha机械臂环境初始化完成
+动作空间: Box(-1.0, 1.0, (4,), float32)
+观察空间: (14,)
+水流速度: [ 0.07243984 -0.00528746  0.02078452]
+Using cpu device
+开始训练...
+[2K---------------------------------━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m1,828/10,000 [0m [ [33m0:00:01[0m < [36m0:00:06[0m , [31m1,404 it/s[0m ]
+| rollout/           |          |
+|    ep_len_mean     | 500      |
+|    ep_rew_mean     | -154     |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 4        |
+|    fps             | 1335     |
+|    time_elapsed    | 1        |
+|    total_timesteps | 2000     |
+| train/             |          |
+|    std             | 0.0498   |
+---------------------------------
+[2K---------------------------------━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m3,888/10,000 [0m [ [33m0:00:02[0m < [36m0:00:05[0m , [31m1,412 it/s[0m ]
+| rollout/           |          |
+|    ep_len_mean     | 500      |
+|    ep_rew_mean     | -151     |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 8        |
+|    fps             | 1370     |
+|    time_elapsed    | 2        |
+|    total_timesteps | 4000     |
+| train/             |          |
+|    std             | 0.0498   |
+---------------------------------
+[2K---------------------------------━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m5,884/10,000 [0m [ [33m0:00:04[0m < [36m0:00:03[0m , [31m1,393 it/s[0m ]
+| rollout/           |          |
+|    ep_len_mean     | 500      |
+|    ep_rew_mean     | -152     |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 12       |
+|    fps             | 1368     |
+|    time_elapsed    | 4        |
+|    total_timesteps | 6000     |
+| train/             |          |
+|    std             | 0.0498   |
+---------------------------------
+[2K---------------------------------━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━[0m [32m7,932/10,000 [0m [ [33m0:00:05[0m < [36m0:00:02[0m , [31m1,393 it/s[0m ]
+| rollout/           |          |
+|    ep_len_mean     | 500      |
+|    ep_rew_mean     | -144     |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 16       |
+|    fps             | 1375     |
+|    time_elapsed    | 5        |
+|    total_timesteps | 8000     |
+| train/             |          |
+|    std             | 0.0498   |
+---------------------------------
+[2K---------------------------------━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:07[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]/s[0m ]s[0m ]
+| rollout/           |          |
+|    ep_len_mean     | 500      |
+|    ep_rew_mean     | -143     |
+|    success_rate    | 0        |
+| time/              |          |
+|    episodes        | 20       |
+|    fps             | 1382     |
+|    time_elapsed    | 7        |
+|    total_timesteps | 10000    |
+| train/             |          |
+|    std             | 0.0498   |
+---------------------------------
+[2KTraceback (most recent call last):━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+[2K  File "D:\thesis\alpha5_rl_pybullet\train_v5_success.py", line 1288, in <module>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    main()
+[2K  File "D:\thesis\alpha5_rl_pybullet\train_v5_success.py", line 1252, in main━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    train_alpha_reach(
+[2K  File "D:\thesis\alpha5_rl_pybullet\train_v5_success.py", line 918, in train_alpha_reach━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    model.learn(
+[2K  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\stable_baselines3\sac\sac.py", line 313, in learn━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    return super().learn(
+           ^^^^^^^^^^^^^^
+[2K  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\stable_baselines3\common\off_policy_algorithm.py", line 356, in learn━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    callback.on_training_end()
+[2K  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\stable_baselines3\common\callbacks.py", line 117, in on_training_end━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    self._on_training_end()
+[2K  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\stable_baselines3\common\callbacks.py", line 232, in _on_training_end━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    callback.on_training_end()
+[2K  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\stable_baselines3\common\callbacks.py", line 117, in on_training_end━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    self._on_training_end()
+[2K  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\stable_baselines3\common\callbacks.py", line 232, in _on_training_end━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    callback.on_training_end()
+[2K  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\stable_baselines3\common\callbacks.py", line 117, in on_training_end━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    self._on_training_end()
+[2K  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\integration\sb3\sb3.py", line 141, in _on_training_end━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    self.save_model()
+[2K  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\integration\sb3\sb3.py", line 145, in save_model━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    wandb.save(self.path, base_path=self.model_save_path)
+[2K  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\wandb_run.py", line 399, in wrapper━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2K  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\wandb_run.py", line 457, in wrapper_fn━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2K  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\wandb_run.py", line 444, in wrapper━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2K  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\wandb_run.py", line 2126, in save━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    return self._save(
+           ^^^^^^^^^^^
+[2K  File "D:\thesis\venvs\alpha5_rl_env\Lib\site-packages\wandb\sdk\wandb_run.py", line 2185, in _save━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    target_path.symlink_to(source_path)
+[2K  File "C:\Users\leoyu\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1198, in symlink_to━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+    os.symlink(target, self, target_is_directory)
+[2KOSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'D:\\thesis\\alpha5_rl_pybullet\\experiments\\SAC_10000steps_20250927_144123\\models\\wandb_SAC\\model.zip' -> 38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]
+'experiments\\SAC_10000steps_20250927_144123\\wandb\\run-20250927_144124-5oo09g1y\\files\\model.zip'
+[35m 100%[0m [38;2;249;38;114m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;2;249;38;114m╸[0m [32m9,984/10,000 [0m [ [33m0:00:08[0m < [36m0:00:01[0m , [31m1,397 it/s[0m ]

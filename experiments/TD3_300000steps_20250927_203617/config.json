@@ -1,0 +1,30 @@
+{
+  "algorithm": "TD3",
+  "timesteps": 300000,
+  "timestamp": "2025-09-27T20:36:20.348365",
+  "config": {
+    "policy": "MlpPolicy",
+    "learning_rate": 0.0003,
+    "buffer_size": 500000,
+    "batch_size": 512,
+    "tau": 0.005,
+    "gamma": 0.98,
+    "train_freq": [
+      2,
+      "episode"
+    ],
+    "gradient_steps": 120,
+    "learning_starts": 5000,
+    "target_policy_noise": 0.2,
+    "target_noise_clip": 0.5,
+    "policy_delay": 2,
+    "policy_kwargs": {
+      "net_arch": [
+        300,
+        300,
+        200
+      ]
+    },
+    "verbose": 1
+  }
+}

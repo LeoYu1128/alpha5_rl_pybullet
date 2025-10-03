@@ -1,0 +1,34 @@
+{
+  "os": "Windows-10-10.0.26100-SP0",
+  "python": "CPython 3.11.9",
+  "startedAt": "2025-09-27T05:07:43.766639Z",
+  "args": [
+    "--timesteps",
+    "100000",
+    "--num_envs",
+    "1"
+  ],
+  "program": "D:\\thesis\\alpha5_rl_pybullet\\train_v5_success.py",
+  "codePath": "train_v5_success.py",
+  "codePathLocal": "train_v5_success.py",
+  "git": {
+    "remote": "https://github.com/LeoYu1128/alpha5_rl_pybullet.git",
+    "commit": "b2e070159e03900a56606b05b85fec2ac2cde633"
+  },
+  "email": "leoyu11285@gmail.com",
+  "root": "experiments\\SAC_100000steps_20250927_150742",
+  "host": "leoyu",
+  "executable": "D:\\thesis\\venvs\\alpha5_rl_env\\Scripts\\python.exe",
+  "cpu_count": 6,
+  "cpu_count_logical": 12,
+  "disk": {
+    "/": {
+      "total": "1000203087872",
+      "used": "365045325824"
+    }
+  },
+  "memory": {
+    "total": "16955232256"
+  },
+  "writerId": "ym00v96e3lb34492uposcg6rjirumad9"
+}

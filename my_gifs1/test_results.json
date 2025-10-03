@@ -1,0 +1,40 @@
+{
+  "total_episodes": 3,
+  "average_reward": -7.124844551086426,
+  "success_rate": 1.0,
+  "average_distance": 0.0490825263162454,
+  "average_length": 89.33333333333333,
+  "gif_count": 3,
+  "detailed_results": {
+    "episodes": [
+      1,
+      2,
+      3
+    ],
+    "rewards": [
+      -3.282036304473877,
+      -1.0249905586242676,
+      -17.067506790161133
+    ],
+    "success_rates": [
+      1,
+      1,
+      1
+    ],
+    "final_distances": [
+      0.04969904199242592,
+      0.04759565740823746,
+      0.049952879548072815
+    ],
+    "episode_lengths": [
+      46,
+      37,
+      185
+    ],
+    "gif_paths": [
+      "/Users/liao1fan/personal/part-time/0916_rl_alpha/code/alpha5_rl_pybullet/alpha5_rl_pybullet/my_gifs/videos/episode_1.gif",
+      "/Users/liao1fan/personal/part-time/0916_rl_alpha/code/alpha5_rl_pybullet/alpha5_rl_pybullet/my_gifs/videos/episode_2.gif",
+      "/Users/liao1fan/personal/part-time/0916_rl_alpha/code/alpha5_rl_pybullet/alpha5_rl_pybullet/my_gifs/videos/episode_3.gif"
+    ]
+  }
+}
