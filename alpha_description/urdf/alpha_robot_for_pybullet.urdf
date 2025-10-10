@@ -19,7 +19,7 @@
     </visual>
     <collision>
       <geometry>
-        <cylinder length="0.150" radius="0.03"/>
+        <cylinder length="0.150" radius="0.05"/>
       </geometry>
       <origin rpy="0 1.57075 0" xyz="-0.055 0 0"/>
     </collision>
@@ -47,7 +47,7 @@
     </visual>
     <collision>
       <geometry>
-        <cylinder length="0.150" radius="0.03"/>
+        <cylinder length="0.150" radius="0.05"/>
       </geometry>
       <origin rpy="0 1.57075 0" xyz="-0.055 0 0"/>
     </collision>
@@ -76,7 +76,7 @@
     </visual>
     <collision>
       <geometry>
-        <cylinder length="0.033" radius="0.03"/>
+        <cylinder length="0.033" radius="0.05"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.0165"/>
     </collision>
@@ -108,7 +108,7 @@
     </visual>
     <collision>
       <geometry>
-        <cylinder length="0.145" radius="0.03"/>
+        <cylinder length="0.145" radius="0.05"/>
       </geometry>
       <origin rpy="0 0 0" xyz="-0.02 0 -0.0725"/>
     </collision>
@@ -122,14 +122,14 @@
 
     <collision>
       <geometry>
-        <cylinder length="0.040" radius="0.03"/>
+        <cylinder length="0.040" radius="0.05"/>
       </geometry>
       <origin rpy="1.5707 0 0" xyz="-0.040 0 -0.1453"/>
     </collision>
     <!-- 顶部球体 -->
     <collision>
       <geometry>
-        <sphere radius="0.032"/>
+        <sphere radius="0.05"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
@@ -137,7 +137,7 @@
     <!-- 底部球体 -->
     <collision>
       <geometry>
-        <sphere radius="0.032"/>
+        <sphere radius="0.05"/>
       </geometry>
       <origin xyz="-0.040 0 -0.1453"/>
     </collision>
@@ -358,7 +358,7 @@
   </link>
   
   <joint name="tcp_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0.09"/>
+    <origin rpy="0 0 0" xyz="0 0 0.04"/>
     <parent link="standard_jaws_base_link"/>
     <child link="tcp"/>
   </joint>

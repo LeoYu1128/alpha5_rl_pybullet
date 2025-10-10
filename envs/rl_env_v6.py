@@ -11,14 +11,12 @@ from envs.test_joint5 import GripperController
 
 class AlphaReachEnv(gym.Env):
     """
-    水下Alpha机械臂到达任务环境
-    任务:在水下环境中控制4个主要关节,让末端执行器到达目标位置
-    考虑流体阻力、浮力、水流干扰等水下物理特性
+    水下Alpha机械臂到达任务环境 - 移除夹爪动作版本
     
-    ⚠️ 关键修改:
-    1. 添加真实角度<->URDF角度转换
-    2. 加载URDF后立即设置到home位置
-    3. reset时使用URDF home位置初始化
+    改动:
+    1. 动作空间从5维减少到4维（移除夹爪控制）
+    2. 观察空间从15维减少到14维（移除夹爪状态）
+    3. 成功到达目标后自动执行夹取序列
     """
     
     def __init__(self, render_mode=None, max_steps=500, reward_type='dense'):
@@ -30,8 +28,7 @@ class AlphaReachEnv(gym.Env):
         self.physics_client = None
         self.reward_type = reward_type
         
-        # ============ 关键修改1: 真实机械臂的home位置定义 ============
-        # 真实机械臂的home位置(编码器读数)
+        # 真实机械臂的home位置
         self.real_home_positions = [
             np.radians(2.34),
             np.radians(87.8),
@@ -39,19 +36,24 @@ class AlphaReachEnv(gym.Env):
             np.radians(0.1)
         ]
         
-        # URDF中的home位置(PyBullet中的角度)
         self.urdf_home_positions = [
             np.radians(2.34),
-            np.radians(0),      # URDF中joint_2=0时直立
+            np.radians(0),
             np.radians(1.0),
             np.radians(0.1)
         ]
         
-        # 角度偏移(真实->URDF需要减去这个值)
         self.angle_offset = np.array([0, np.radians(87.8), 0, 0])
         
-        # 夹爪home位置
-        self.home_gripper_position = 0.0014  # 1.4mm
+        # 夹爪参数
+        self.home_gripper_position = 0.0014  # 1.4mm home位置
+        self.gripper_open_position = 0.0133  # 13.3mm 完全打开
+        self.gripper_close_position = 0.005  # 5mm 夹取位置（安全距离）
+        
+        # ⚠️ 新增：夹取状态标志
+        self.grasping_in_progress = False
+        self.grasp_step_counter = 0
+        self.grasp_sequence_steps = 60  # 夹取序列持续60步（0.25秒 @ 240Hz）
         
         # 水下环境参数
         self.water_density = 1000.0
@@ -79,15 +81,13 @@ class AlphaReachEnv(gym.Env):
         self.z_current = np.random.uniform(-0.03,0.03)
         self.current_velocity = np.array([self.x_current, self.y_current, self.z_current])
         self.current_variation = True
-        self.turbulence_strength = 0.01
+        self.turbulence_strength = 0.02
         
         print("\n" + "="*70)
-        print("水下机械臂环境初始化 - 基于真实机械臂配置")
+        print("水下机械臂环境初始化 - 无夹爪动作版本")
         print("="*70)
-        print(f"真实Home位置(编码器): {np.degrees(self.real_home_positions)}")
-        print(f"URDF Home位置(内部):  {np.degrees(self.urdf_home_positions)}")
-        print(f"角度偏移(Real-URDF):  {np.degrees(self.angle_offset)}")
-        print(f"夹爪Home位置:         {self.home_gripper_position*1000:.1f}mm")
+        print(f"改动: 移除夹爪动作，成功后自动执行夹取")
+        print(f"夹取序列: 打开({self.gripper_open_position*1000:.1f}mm) → 关闭({self.gripper_close_position*1000:.1f}mm)")
         print("="*70 + "\n")
 
         # 连接物理引擎
@@ -102,19 +102,20 @@ class AlphaReachEnv(gym.Env):
         self.velocity_penalty = 0.02
         self.time_penalty = 0.005
         self.success_bonus = 5.0
-        self.success_threshold = 0.005
+        self.success_threshold = 0.05
         self.previous_distance = None
 
-        # 动作空间: 4个关节 + 1个夹爪
+        # ⚠️ 修改1: 动作空间从5维减少到4维（移除夹爪）
         self.action_space = spaces.Box(
-            low=np.array([-1.0, -1.0, -1.0, -1.0, 0.0]),
-            high=np.array([1.0, 1.0, 1.0, 1.0, 1.0]),
-            shape=(5,),
+            low=np.array([-1.0, -1.0, -1.0, -1.0]),
+            high=np.array([1.0, 1.0, 1.0, 1.0]),
+            shape=(4,),  # 只有4个关节
             dtype=np.float32
         )
         
-        # 观察空间: 4关节位置 + 4关节速度 + 3末端位置 + 3目标位置 + 1夹爪
-        obs_dim = 15
+        # ⚠️ 修改2: 观察空间从15维减少到14维（移除夹爪状态）
+        # [4关节位置, 4关节速度, 3末端位置, 3目标位置] = 14维
+        obs_dim = 14
         self.observation_space = spaces.Box(
             low=-np.inf,
             high=np.inf,
@@ -122,16 +123,16 @@ class AlphaReachEnv(gym.Env):
             dtype=np.float32
         )
         
-        print(f"动作空间: {self.action_space}")
-        print(f"观察空间: {self.observation_space.shape}")
+        print(f"✅ 动作空间: {self.action_space.shape} (移除夹爪)")
+        print(f"✅ 观察空间: {self.observation_space.shape} (移除夹爪状态)")
         print(f"水流速度: {self.current_velocity}\n")
     
     def real_to_urdf(self, real_angles):
-        """真实机械臂角度 -> URDF角度(用于控制PyBullet)"""
+        """真实机械臂角度 -> URDF角度"""
         return np.array(real_angles) - self.angle_offset
     
     def urdf_to_real(self, urdf_angles):
-        """URDF角度 -> 真实机械臂角度(用于显示)"""
+        """URDF角度 -> 真实机械臂角度"""
         return np.array(urdf_angles) + self.angle_offset
     
     def _connect_physics(self):
@@ -158,12 +159,11 @@ class AlphaReachEnv(gym.Env):
     
     def _setup_underwater_scene(self):
         """设置水下仿真场景"""
-        # 加载海底地面
         self.plane_id = p.loadURDF("plane.urdf", physicsClientId=self.physics_client)
         p.changeVisualShape(self.plane_id, -1, rgbaColor=[0.1, 0.2, 0.4, 1.0],
                            physicsClientId=self.physics_client)
         
-        # ============ 关键修改2: 加载URDF并立即设置home位置 ============
+        # 加载URDF
         try:
             from pathlib import Path
             this_dir = Path(__file__).resolve().parent
@@ -181,7 +181,6 @@ class AlphaReachEnv(gym.Env):
         if proj_root is not None:
             robot_paths.extend([
                 str((proj_root / "alpha_description/urdf/alpha_robot_for_pybullet.urdf").resolve()),
-                str((proj_root.parent / "alpha_description/urdf/alpha_robot_for_pybullet.urdf").resolve()),
             ])
         
         self.robot_id = None
@@ -195,10 +194,9 @@ class AlphaReachEnv(gym.Env):
                         flags=p.URDF_USE_SELF_COLLISION,
                         physicsClientId=self.physics_client
                     )
-                    print(f"✅ 加载URDF成功: {robot_path}")
+                    print(f"✅ 加载URDF: {robot_path}")
                     
-                    # ⚠️ 立即设置关节到home位置(使用URDF角度)
-                    print("   立即设置home位置...")
+                    # 立即设置关节到home位置
                     num_joints = p.getNumJoints(self.robot_id, physicsClientId=self.physics_client)
                     for i in range(num_joints):
                         joint_info = p.getJointInfo(self.robot_id, i, physicsClientId=self.physics_client)
@@ -220,15 +218,13 @@ class AlphaReachEnv(gym.Env):
                             p.resetJointState(self.robot_id, i, self.home_gripper_position,
                                             physicsClientId=self.physics_client)
                     
-                    # 让物理引擎稳定一下
                     for _ in range(100):
                         p.stepSimulation(physicsClientId=self.physics_client)
                     
-                    print("   ✅ Home位置设置完成")
                     break
                     
                 except Exception as e:
-                    print(f"   加载{robot_path}失败: {e}")
+                    print(f"加载{robot_path}失败: {e}")
                     continue
         
         if self.robot_id is None:
@@ -278,9 +274,6 @@ class AlphaReachEnv(gym.Env):
                 self.main_joint_indices.append(i)
         
         print(f"主要控制关节: {len(self.main_joint_indices)}个")
-        for i, joint_idx in enumerate(self.main_joint_indices):
-            joint = self.joint_info[joint_idx]
-            print(f"  [{i}] {joint['name']}: [{joint['lower']:.2f}, {joint['upper']:.2f}]")
         
         # 找末端执行器
         self.tcp_index = None
@@ -294,12 +287,10 @@ class AlphaReachEnv(gym.Env):
         if self.tcp_index is None:
             self.tcp_index = num_joints - 1
         
-        print(f"末端执行器索引: {self.tcp_index}")
-        
-        # 初始化夹爪
+        # 初始化夹爪（保留控制器，用于自动夹取）
         try:
             self.gripper = GripperController(self.robot_id)
-            print("✅ 夹爪控制器初始化成功")
+            print("✅ 夹爪控制器初始化成功（用于自动夹取）")
         except Exception as e:
             print(f"⚠️ 夹爪控制器初始化失败: {e}")
             self.gripper = None
@@ -356,7 +347,7 @@ class AlphaReachEnv(gym.Env):
         """应用水下力"""
         self._update_current_velocity()
         
-        # 1. 浮力补偿
+        # 浮力补偿
         if self.buoyancy_enabled:
             for link_idx in self.link_indices:
                 try:
@@ -374,7 +365,7 @@ class AlphaReachEnv(gym.Env):
                 except:
                     pass
         
-        # 2. 流体阻力
+        # 流体阻力
         num_joints = p.getNumJoints(self.robot_id, physicsClientId=self.physics_client)
         key_links = [self.tcp_index]
         for i, joint_idx in enumerate(self.main_joint_indices[:3]):
@@ -407,7 +398,7 @@ class AlphaReachEnv(gym.Env):
             except:
                 pass
         
-        # 3. 水流推力
+        # 水流推力
         if np.linalg.norm(self.current_velocity_actual) > 0.01:
             for link_idx in self.link_indices:
                 try:
@@ -421,7 +412,7 @@ class AlphaReachEnv(gym.Env):
                 except:
                     pass
         
-        # 4. 关节阻尼
+        # 关节阻尼
         for joint_idx in self.main_joint_indices:
             try:
                 joint_state = p.getJointState(self.robot_id, joint_idx,
@@ -457,7 +448,7 @@ class AlphaReachEnv(gym.Env):
         return np.array([0.2, 0.0, 0.25], dtype=np.float32)
     
     def _update_target_position(self, dt=1./240.):
-        """更新目标位置(受水流影响)"""
+        """更新目标位置"""
         if hasattr(self, 'target_position'):
             self.target_position += self.current_velocity_actual * dt
             x, y, z = self.target_position
@@ -504,12 +495,48 @@ class AlphaReachEnv(gym.Env):
                                     physicsClientId=self.physics_client)
         return np.array(link_state[0], dtype=np.float32)
     
+    def _execute_grasp_sequence(self):
+        """
+        ⚠️ 新增: 执行夹取序列
+        
+        序列步骤:
+        1. 打开夹爪到13.3mm
+        2. 等待稳定
+        3. 关闭到5mm（或遇到阻力停止）
+        """
+        if self.gripper is None:
+            return
+        
+        # 夹取序列分为两个阶段
+        half_steps = self.grasp_sequence_steps // 2
+        
+        if self.grasp_step_counter < half_steps:
+            # 阶段1: 打开夹爪
+            target_normalized = (self.gripper_open_position - 0.00137) / (0.0133 - 0.00137)
+            self.gripper.control(target_normalized)  # ≈1.0 (完全打开)
+            
+        else:
+            # 阶段2: 关闭夹爪到5mm
+            target_normalized = (self.gripper_close_position - 0.00137) / (0.0133 - 0.00137)
+            self.gripper.control(target_normalized)  # ≈0.3 (关闭到5mm)
+        
+        self.grasp_step_counter += 1
+        
+        # 夹取序列完成
+        if self.grasp_step_counter >= self.grasp_sequence_steps:
+            self.grasping_in_progress = False
+            self.grasp_step_counter = 0
+            if self.render_mode == "human":
+                print(f"✅ 夹取序列完成！最终位置: {self.gripper_close_position*1000:.1f}mm")
+    
     def _apply_action(self, action):
-        """应用动作"""
+        """
+        ⚠️ 修改: 只控制4个关节，夹爪自动控制
+        """
         current_positions = self._get_joint_positions()
         
-        arm_action = action[:4]
-        gripper_action = action[4]
+        # action现在只有4维（移除了夹爪）
+        arm_action = action  # 全部都是机械臂动作
         
         scaled_action = arm_action * 0.15
         target_positions = current_positions + scaled_action
@@ -518,7 +545,7 @@ class AlphaReachEnv(gym.Env):
             joint = self.joint_info[joint_idx]
             target_positions[i] = np.clip(target_positions[i], joint['lower'], joint['upper'])
         
-        control_torque = 9.0 * 3.0  # 27 Nm
+        control_torque = 9.0 * 3.0
         
         for i, joint_idx in enumerate(self.main_joint_indices):
             p.setJointMotorControl2(
@@ -529,8 +556,16 @@ class AlphaReachEnv(gym.Env):
                 physicsClientId=self.physics_client
             )
         
-        if self.gripper is not None:
-            self.gripper.control(gripper_action)
+        # ⚠️ 夹爪控制逻辑改变:
+        # - 如果正在执行夹取序列,继续执行
+        # - 否则保持在home位置
+        if self.grasping_in_progress:
+            self._execute_grasp_sequence()
+        else:
+            # 保持home位置
+            if self.gripper is not None:
+                home_normalized = (self.home_gripper_position - 0.00137) / (0.0133 - 0.00137)
+                self.gripper.control(home_normalized)
     
     def _compute_reward(self, action):
         """计算奖励"""
@@ -567,24 +602,20 @@ class AlphaReachEnv(gym.Env):
         return float(total_reward), bool(success), reward_terms
     
     def _get_observation(self):
-        """获取观察"""
+        """
+        ⚠️ 修改: 移除夹爪状态，观察空间14维
+        """
         joint_positions = self._get_joint_positions()
         joint_velocities = self._get_joint_velocities()
         ee_position = self._get_end_effector_position()
         
-        if self.gripper is not None:
-            gripper_state = self.gripper.get_state()
-            gripper_pose = gripper_state['normalized']
-        else:
-            gripper_pose = 0.0
-        
+        # 不再包含夹爪状态
         observation = np.concatenate([
-            joint_positions,
-            joint_velocities,
-            ee_position,
-            self.target_position,
-            [gripper_pose]
-        ]).astype(np.float32)
+            joint_positions,     # 4维
+            joint_velocities,    # 4维
+            ee_position,         # 3维
+            self.target_position # 3维
+        ]).astype(np.float32)  # 总共14维
         
         return observation
     
@@ -621,13 +652,16 @@ class AlphaReachEnv(gym.Env):
         
         self.current_step = 0
         
-        # ============ 关键修改3: 使用URDF home位置初始化 ============
-        # 基于URDF home位置添加小范围扰动
+        # ⚠️ 重置夹取状态
+        self.grasping_in_progress = False
+        self.grasp_step_counter = 0
+        
+        # 基于URDF home位置初始化
         init_positions = []
         for i, joint_idx in enumerate(self.main_joint_indices):
             joint = self.joint_info[joint_idx]
-            home_pos = self.urdf_home_positions[i]  # 使用URDF home位置
-            range_width = 0.1  # ±0.1弧度扰动
+            home_pos = self.urdf_home_positions[i]
+            range_width = 0.1
             
             init_pos = np.random.uniform(
                 max(joint['lower'], home_pos - range_width),
@@ -635,7 +669,6 @@ class AlphaReachEnv(gym.Env):
             )
             init_positions.append(init_pos)
         
-        # 设置关节初始位置(URDF角度)
         for i, joint_idx in enumerate(self.main_joint_indices):
             p.resetJointState(
                 self.robot_id, joint_idx, init_positions[i],
@@ -644,7 +677,6 @@ class AlphaReachEnv(gym.Env):
         
         # 设置夹爪到home位置
         if hasattr(self, 'gripper') and self.gripper is not None:
-            # 找到joint_5并设置
             for i in range(p.getNumJoints(self.robot_id, physicsClientId=self.physics_client)):
                 joint_info = p.getJointInfo(self.robot_id, i, physicsClientId=self.physics_client)
                 if joint_info[1].decode('utf-8') == 'joint_5':
@@ -652,7 +684,6 @@ class AlphaReachEnv(gym.Env):
                                     physicsClientId=self.physics_client)
                     break
             
-            # 控制夹爪到home位置
             gripper_home_normalized = (self.home_gripper_position - 0.00137) / (0.0133 - 0.00137)
             self.gripper.control(gripper_home_normalized)
         
@@ -675,8 +706,6 @@ class AlphaReachEnv(gym.Env):
         
         observation = self._get_observation()
         
-        # ============ 关键修改4: info中包含角度信息 ============
-        # 获取当前URDF角度并转换为真实角度用于调试
         current_urdf_angles = self._get_joint_positions()
         current_real_angles = self.urdf_to_real(current_urdf_angles)
         
@@ -686,20 +715,24 @@ class AlphaReachEnv(gym.Env):
             'urdf_home_positions': self.urdf_home_positions.copy(),
             'real_home_positions': self.real_home_positions.copy(),
             'current_urdf_angles': current_urdf_angles.copy(),
-            'current_real_angles': current_real_angles.copy()
+            'current_real_angles': current_real_angles.copy(),
+            'grasping_enabled': True  # 标记支持自动夹取
         }
         
         return observation, info
     
     def step(self, action):
-        """执行一步"""
+        """
+        ⚠️ 修改: 成功到达目标后触发自动夹取
+        """
         self.current_step += 1
         
         action = np.array(action, dtype=np.float32)
         
+        # 应用动作
         self._apply_action(action)
         
-        # 应用水下力并仿真
+        # 物理仿真
         for _ in range(4):
             self._apply_underwater_forces()
             p.stepSimulation(physicsClientId=self.physics_client)
@@ -713,6 +746,13 @@ class AlphaReachEnv(gym.Env):
         observation = self._get_observation()
         reward, success, reward_terms = self._compute_reward(action)
         
+        # ⚠️ 关键修改: 首次成功时触发夹取序列
+        if success and not self.grasping_in_progress and self.grasp_step_counter == 0:
+            self.grasping_in_progress = True
+            self.grasp_step_counter = 0
+            if self.render_mode == "human":
+                print(f"🎯 到达目标！启动自动夹取序列...")
+        
         terminated = bool(success)
         truncated = bool(self.current_step >= self.max_steps)
         
@@ -724,7 +764,9 @@ class AlphaReachEnv(gym.Env):
             'distance': current_distance,
             'is_success': success,
             'current_velocity': self.current_velocity_actual.copy(),
-            'underwater': True
+            'underwater': True,
+            'grasping': self.grasping_in_progress,  # 是否正在夹取
+            'grasp_progress': self.grasp_step_counter / self.grasp_sequence_steps if self.grasping_in_progress else 0.0
         }
         info.update(reward_terms)
         
@@ -746,43 +788,50 @@ class AlphaReachEnv(gym.Env):
 # 测试环境
 if __name__ == "__main__":
     print("="*70)
-    print("水下Alpha机械臂环境测试 - 基于真实机械臂配置")
+    print("测试：无夹爪动作的RL环境（自动夹取版本）")
     print("="*70)
     
     env = AlphaReachEnv(render_mode="human")
     
     obs, info = env.reset()
     
-    print(f"\n初始化信息:")
-    print(f"  观察维度: {obs.shape}")
+    print(f"\n✅ 初始化信息:")
+    print(f"  观察维度: {obs.shape} (应该是14维)")
+    print(f"  动作维度: {env.action_space.shape} (应该是4维)")
     print(f"  目标位置: {info['target_position']}")
     print(f"  初始距离: {info['initial_distance']:.3f}m")
-    print(f"\n角度信息:")
-    print(f"  URDF Home: {np.degrees(info['urdf_home_positions'])}")
-    print(f"  Real Home: {np.degrees(info['real_home_positions'])}")
-    print(f"  当前URDF角度: {np.degrees(info['current_urdf_angles'])}")
-    print(f"  当前真实角度: {np.degrees(info['current_real_angles'])}")
+    print(f"  自动夹取: {'启用' if info['grasping_enabled'] else '禁用'}")
     
     print(f"\n开始测试...")
+    print("提示: 当到达目标(<5cm)时，会自动执行夹取序列\n")
     
-    for step in range(200):
-        action = env.action_space.sample()
+    success_count = 0
+    
+    for step in range(500):
+        action = env.action_space.sample()  # 现在只有4维
         obs, reward, terminated, truncated, info = env.step(action)
         done = terminated or truncated
         
         if step % 20 == 0:
-            # 获取当前角度并转换
             current_urdf = env._get_joint_positions()
             current_real = env.urdf_to_real(current_urdf)
             
-            print(f"\n步数 {step}:")
-            print(f"  奖励={reward:.3f}, 距离={info['distance']:.3f}m, 成功={info['success']}")
-            print(f"  当前真实角度: {np.degrees(current_real).astype(int)}°")
+            grasp_status = ""
+            if info['grasping']:
+                grasp_status = f" | 🤖 夹取中({info['grasp_progress']*100:.0f}%)"
+            
+            print(f"步数 {step}:")
+            print(f"  奖励={reward:.3f}, 距离={info['distance']:.3f}m, 成功={info['success']}{grasp_status}")
+        
+        if info['success']:
+            success_count += 1
         
         if done:
             print(f"\n回合结束: 成功={info['success']}, 最终距离={info['distance']:.3f}m")
+            if info['success']:
+                print(f"  ✅ 夹取序列已完成")
             obs, info = env.reset()
-            print(f"  重置到真实角度: {np.degrees(info['current_real_angles']).astype(int)}°")
+            success_count = 0
     
     env.close()
     print("\n测试完成!")

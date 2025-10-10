@@ -11,19 +11,41 @@ import math
 
 class AlphaReachEnv(gym.Env):
     """
+    能跑通
     水下Alpha机械臂到达任务环境
     任务：在水下环境中控制4个主要关节，让末端执行器到达目标位置
     考虑流体阻力、浮力、水流干扰等水下物理特性
     """
     
-    def __init__(self, render_mode=None, max_steps=500, reward_type='dense'):
+    def __init__(self, render_mode=None, max_steps=1000, reward_type='dense'):
         super().__init__()
+        
+        # ✅ 目标漂移参数
+        self.max_target_drift = 0.04  # 5cm最大漂移
+        self.drift_damping = 0.9
+        self.drift_noise_strength = 0.03
+        self.target_velocity = np.zeros(3, dtype=np.float32)
 
         self.render_mode = render_mode
         self.max_steps = max_steps
         self.current_step = 0
         self.physics_client = None
         self.reward_type = reward_type  # 'dense' 或 'sparse'
+         # ✅ 新增：夹爪默认张开位置
+        self.home_gripper_position = 0  # 完全关闭状态 这个后面在自己设置就行，完全不考虑joint_5
+        # ✅ 新增：真实机械臂质量参数
+        self.urdf_total_mass = 1.52          # URDF文件中的总质量
+        self.target_actual_mass = 1.36       # 实际测量的机械臂质量
+        self.target_underwater_mass = 0.9    # 水下有效质量（扣除浮力后）
+         # 计算浮力补偿比例
+        buoyancy_mass = self.target_actual_mass - self.target_underwater_mass
+        self.buoyancy_compensation_ratio = buoyancy_mass / self.target_actual_mass
+        self.robot_mass_scale = self.target_actual_mass / self.urdf_total_mass
+        
+        # 流体动力学参数
+        self.drag_coefficient = 0.5
+        self.added_mass_coefficient = 0.3
+        self.buoyancy_enabled = True
         
         # 水下环境参数
         self.water_density = 1000.0  # 水密度 kg/m³
@@ -37,7 +59,7 @@ class AlphaReachEnv(gym.Env):
         self.buoyancy_enabled = True  # 是否启用浮力
         
         # 水流参数
-        self.current_velocity = np.array([0.1, 0.05, 0.0])  # 水流速度 m/s
+        self.current_velocity = np.random.uniform(-0.2,0.2,size=3)  # 水流速度 m/s
         self.current_variation = True  # 水流是否变化
         self.turbulence_strength = 0.015  # 湍流强度
         
@@ -48,11 +70,11 @@ class AlphaReachEnv(gym.Env):
 
         # 奖励 shaping 系数
         self.distance_scale = 1.0
-        self.progress_scale = 1.2
+        self.progress_scale = 2.0
         self.control_penalty = 0.01
         self.velocity_penalty = 0.02
-        self.time_penalty = 0.005
-        self.success_bonus = 5.0
+        self.time_penalty = 0.002
+        self.success_bonus = 50.0
         self.success_threshold = 0.02
         self.previous_distance = None
 
@@ -184,7 +206,20 @@ class AlphaReachEnv(gym.Env):
         
         if self.robot_id is None:
             raise FileNotFoundError("找不到Alpha机械臂URDF文件")
-        
+        # # ✅ 新增：初始化夹爪到张开位置
+        # num_joints = p.getNumJoints(self.robot_id, physicsClientId=self.physics_client)
+        # for i in range(num_joints):
+        #     joint_info = p.getJointInfo(self.robot_id, i, physicsClientId=self.physics_client)
+        #     joint_name = joint_info[1].decode('utf-8')
+            
+        #     if joint_name == 'joint_5':  # 夹爪关节
+        #         p.resetJointState(
+        #             self.robot_id, i, 
+        #             self.home_gripper_position,
+        #             physicsClientId=self.physics_client
+        #         )
+        #         print(f"✅ 夹爪初始化到张开位置: {self.home_gripper_position}")
+                # break
         # 添加一些水下装饰物
         self._add_underwater_decorations()
 
@@ -262,44 +297,51 @@ class AlphaReachEnv(gym.Env):
         self._setup_underwater_dynamics()
     
     def _setup_underwater_dynamics(self):
-        """设置水下动力学特性"""
-        # 为每个link设置水下物理特性
+        """设置水下动力学特性（优化版：真实质量 + 逐link浮力）"""
         num_joints = p.getNumJoints(self.robot_id, physicsClientId=self.physics_client)
         
-        for i in range(-1, num_joints):  # -1代表base link
-            # 增加阻尼模拟水阻
-            if i >= 0:
-                p.changeDynamics(
-                    self.robot_id, i,
-                    linearDamping=2.0,     # 线性阻尼 (水阻)
-                    angularDamping=2.0,    # 角阻尼
-                    jointDamping=0.5,      # 关节阻尼
-                    physicsClientId=self.physics_client
-                )
-            else:
-                # Base link
-                p.changeDynamics(
-                    self.robot_id, i,
-                    linearDamping=1.0,
-                    angularDamping=1.0,
-                    physicsClientId=self.physics_client
-                )
-            
-            # 如果启用浮力，修改质量和密度
-            if self.buoyancy_enabled:
-                mass_info = p.getDynamicsInfo(self.robot_id, i, physicsClientId=self.physics_client)
-                original_mass = mass_info[0]
+        # ✅ 新增：存储每个link的真实质量
+        self.link_masses = {}
+        self.link_indices = []
+        
+        # 第一步：调整所有link质量到真实值
+        for i in range(-1, num_joints):
+            try:
+                dynamics_info = p.getDynamicsInfo(self.robot_id, i, physicsClientId=self.physics_client)
+                urdf_mass = dynamics_info[0]
                 
-                # 模拟浮力效果：减少有效质量
-                buoyancy_factor = 0.7  # 浮力抵消70%的重量
-                effective_mass = original_mass * buoyancy_factor
-                
-                if effective_mass > 0:
+                if urdf_mass > 0:
+                    # 从URDF质量缩放到真实质量
+                    real_mass = urdf_mass * self.robot_mass_scale
+                    self.link_masses[i] = real_mass
+                    self.link_indices.append(i)
+                    
+                    # 设置真实质量
                     p.changeDynamics(
                         self.robot_id, i,
-                        mass=effective_mass,
+                        mass=real_mass,
                         physicsClientId=self.physics_client
                     )
+                
+                # 设置阻尼
+                if i >= 0:
+                    p.changeDynamics(
+                        self.robot_id, i,
+                        linearDamping=2.0,
+                        angularDamping=2.0,
+                        jointDamping=0.5,
+                        physicsClientId=self.physics_client
+                    )
+                else:
+                    p.changeDynamics(
+                        self.robot_id, i,
+                        linearDamping=1.0,
+                        angularDamping=1.0,
+                        physicsClientId=self.physics_client
+                    )
+            except Exception as e:
+                # 忽略固定link的错误
+                pass
     
     def _update_current_velocity(self):
         """更新水流速度 (模拟变化的水流)"""
@@ -310,9 +352,9 @@ class AlphaReachEnv(gym.Env):
             # 基础水流 + 周期性变化 + 随机湍流
             base_current = self.current_velocity.copy()
             periodic_variation = np.array([
-                0.03 * np.sin(time_factor),
+                0.02 * np.sin(time_factor),
                 0.02 * np.cos(time_factor * 1.5),
-                0.01 * np.sin(time_factor * 0.5)
+                0.02 * np.sin(time_factor * 0.5)
             ])
             turbulence = np.random.normal(0, self.turbulence_strength, 3)
             
@@ -323,7 +365,26 @@ class AlphaReachEnv(gym.Env):
     def _apply_underwater_forces(self):
         """应用水下力：水流、阻力等"""
         self._update_current_velocity()
-        
+        # ✅ 新增：为每个link施加浮力
+        if self.buoyancy_enabled:
+            for link_idx in self.link_indices:
+                try:
+                    mass = self.link_masses.get(link_idx, 0)
+                    if mass > 0:
+                        # 计算重力和浮力
+                        gravity_force = mass * abs(self.gravity)
+                        buoyancy_force = gravity_force * self.buoyancy_compensation_ratio
+                        
+                        # 施加向上的浮力
+                        p.applyExternalForce(
+                            self.robot_id, link_idx,
+                            forceObj=[0, 0, buoyancy_force],
+                            posObj=[0, 0, 0],
+                            flags=p.LINK_FRAME,
+                            physicsClientId=self.physics_client
+                        )
+                except:
+                    pass
         # 获取末端执行器状态
         ee_state = p.getLinkState(
             self.robot_id, self.tcp_index, 
@@ -340,7 +401,7 @@ class AlphaReachEnv(gym.Env):
                      relative_velocity * np.linalg.norm(relative_velocity)
         
         # 限制力的大小避免不稳定
-        max_force = 8.0
+        max_force = 5.0
         drag_force = np.clip(drag_force, -max_force, max_force)
         
         # 应用阻力到末端执行器
@@ -367,14 +428,90 @@ class AlphaReachEnv(gym.Env):
                 force=damping_torque,
                 physicsClientId=self.physics_client
             )
-    
+    def _update_target_position(self, dt=1./240.):
+        """更新目标位置 - 随机摆动（像浮标）"""
+        if not hasattr(self, 'target_position'):
+            return
+        
+        # 1. 恢复力（弹簧效应）
+        displacement = self.target_position - self.initial_target_position
+        distance_from_initial = np.linalg.norm(displacement)
+        
+        if distance_from_initial > 0.001:
+            # 离初始位置越远，恢复力越强
+            restore_strength = min(distance_from_initial / self.max_target_drift, 1.0) ** 2
+            restore_force = -displacement * restore_strength * 0.5
+        else:
+            restore_force = np.zeros(3)
+        
+        # 2. 随机扰动（模拟湍流）
+        random_current = np.array([
+            np.random.uniform(-self.drift_noise_strength, self.drift_noise_strength),
+            np.random.uniform(-self.drift_noise_strength, self.drift_noise_strength),
+            np.random.uniform(-self.drift_noise_strength * 0.5, self.drift_noise_strength * 0.5)  # Z轴扰动较小
+        ])
+        
+        # 3. 周期性波浪（模拟水流变化）
+        time_factor = self.current_step * 0.01
+        wave_force = np.array([
+            0.02 * np.sin(time_factor * 0.2),
+            0.02 * np.cos(time_factor * 0.35),
+            0.02 * np.sin(time_factor * 0.2)
+        ])
+        
+        # 4. 更新速度（物理积分）
+        total_force = restore_force + random_current + wave_force
+        self.target_velocity += total_force
+        self.target_velocity *= self.drift_damping  # 速度衰减
+        
+        # 限制最大速度（避免过快移动）
+        max_velocity = 0.015  # 2cm/s
+        velocity_magnitude = np.linalg.norm(self.target_velocity)
+        if velocity_magnitude > max_velocity:
+            self.target_velocity *= (max_velocity / velocity_magnitude)
+        
+        # 5. 更新位置
+        self.target_position += self.target_velocity * dt
+        
+        # 6. 硬性限制：不超过最大漂移距离
+        displacement = self.target_position - self.initial_target_position
+        distance_from_initial = np.linalg.norm(displacement)
+        
+        if distance_from_initial > self.max_target_drift:
+            direction = displacement / distance_from_initial
+            self.target_position = self.initial_target_position + direction * self.max_target_drift
+            # 碰到边界时反弹
+            self.target_velocity = -self.target_velocity * 0.3
+        
+        # 7. 工作空间限制（防止飞出机械臂范围）
+        x, y, z = self.target_position
+        r_xy = np.sqrt(x**2 + y**2)
+        
+        if r_xy > self.workspace_radius * 0.9:
+            scale = (self.workspace_radius * 0.9) / r_xy
+            x *= scale
+            y *= scale
+            self.target_velocity[:2] *= scale
+        
+        z_min = self.base_height + 0.05
+        z_max = 0.35 + self.base_height
+        
+        if z < z_min:
+            z = z_min
+            self.target_velocity[2] = abs(self.target_velocity[2]) * 0.3
+        elif z > z_max:
+            z = z_max
+            self.target_velocity[2] = -abs(self.target_velocity[2]) * 0.3
+        
+        self.target_position = np.array([x, y, z], dtype=np.float32)
+
     def _sample_target_position(self):
         """在机械臂可达范围内采样目标位置"""
         max_attempts = 50
 
         # 更保守的可达范围设置
         safe_radius_min = 0.12       # 最小距离
-        safe_radius_max = 0.25       # 最大距离 (保守估计可达范围)
+        safe_radius_max = 0.4       # 最大距离 (保守估计可达范围)
         z_min = 0.15                 # 高度下限
         z_max = 0.35                 # 高度上限
 
@@ -426,9 +563,15 @@ class AlphaReachEnv(gym.Env):
         """应用动作到水下机械臂"""
         # 获取当前关节位置
         current_positions = self._get_joint_positions()
-
+        current_distance = np.linalg.norm(self._get_end_effector_position() - self.target_position)
+        if current_distance > 0.15:
+            scale = 0.1  # 增大动作幅度
+        elif current_distance > 0.07 and current_distance <= 0.15:
+            scale = 0.08
+        else:
+            scale = 0.04  # 减小动作幅度
         # 将归一化动作缩放到实际增量 (增大动作幅度)
-        scaled_action = action * 0.15  # 将[-1,1]缩放到[-0.15,0.15]
+        scaled_action = action * scale  # 将[-1,1]缩放到[-0.15,0.15]
         target_positions = current_positions + scaled_action
         
         # 应用关节限制
@@ -447,11 +590,24 @@ class AlphaReachEnv(gym.Env):
                 joint_idx,
                 p.POSITION_CONTROL,
                 targetPosition=target_positions[i],
-                maxVelocity=1.0,  # 水下速度更慢
-                force=500,        # 水下需要更大的力克服阻力
+                maxVelocity=0.7,  # 水下速度更慢
+                force=9,        # 水下需要更大的力克服阻力
                 physicsClientId=self.physics_client
             )
-    
+        # # ✅ 新增：强制保持夹爪张开（不参与强化学习）
+        # for i in range(p.getNumJoints(self.robot_id, physicsClientId=self.physics_client)):
+        #     joint_info = p.getJointInfo(self.robot_id, i, physicsClientId=self.physics_client) ///////////////////////////////////////////////
+        #     joint_name = joint_info[1].decode('utf-8')
+            
+        #     if joint_name == 'joint_5':  # 夹爪关节
+        #         p.setJointMotorControl2(
+        #             self.robot_id, i,
+        #             p.POSITION_CONTROL,
+        #             targetPosition=self.home_gripper_position,
+        #             force=10,  # 较小的力保持张开
+        #             physicsClientId=self.physics_client
+        #         )
+        #         break
     def compute_goal_reward(self, achieved_goal, desired_goal, info=None):
         """基础距离奖励 (保留兼容性)"""
         distance = np.linalg.norm(achieved_goal - desired_goal, axis=-1)
@@ -507,7 +663,7 @@ class AlphaReachEnv(gym.Env):
             joint_velocities,             # 4维  
             ee_position,                  # 3维
             self.target_position,         # 3维
-            self.current_velocity_actual  # 3维 - 当前水流速度 ################################################################################
+            # self.current_velocity_actual  # 3维 - 当前水流速度 ################################################################################
         ]).astype(np.float32)
         
         return observation
@@ -523,7 +679,7 @@ class AlphaReachEnv(gym.Env):
         # 创建橙色球体作为目标标记 (在水下更显眼)
         visual_shape = p.createVisualShape(
             p.GEOM_SPHERE,
-            radius=0.04,  # 恢复到原始尺寸的一半
+            radius=0.01,  # 恢复到原始尺寸的一半
             rgbaColor=[1, 0.5, 0, 1.0],  # 橙色，完全不透明
             physicsClientId=self.physics_client
         )
@@ -534,7 +690,18 @@ class AlphaReachEnv(gym.Env):
             basePosition=self.target_position,
             physicsClientId=self.physics_client
         )
-    
+    def _update_target_visual(self):
+        """更新目标视觉标记的位置"""
+        if hasattr(self, 'target_visual_id') and self.target_visual_id is not None:
+            try:
+                p.resetBasePositionAndOrientation(
+                    self.target_visual_id,
+                    self.target_position,
+                    [0, 0, 0, 1],  # 四元数姿态
+                    physicsClientId=self.physics_client
+                )
+            except:
+                pass
     def reset(self, seed=None, options=None):
         """重置水下环境"""
         if seed is not None:
@@ -553,7 +720,7 @@ class AlphaReachEnv(gym.Env):
         for joint_idx in self.main_joint_indices:
             joint = self.joint_info[joint_idx]
             range_center = (joint['lower'] + joint['upper']) / 2
-            range_width = (joint['upper'] - joint['lower']) * 0.3  # 水下初始化范围更小
+            range_width = (joint['upper'] - joint['lower']) * 0.8  # 水下初始化范围更小
             init_pos = np.random.uniform(
                 range_center - range_width,
                 range_center + range_width
@@ -566,9 +733,25 @@ class AlphaReachEnv(gym.Env):
                 self.robot_id, joint_idx, init_positions[i],
                 physicsClientId=self.physics_client
             )
-        
+        # # ✅ 新增：重置夹爪到张开位置
+        # for i in range(p.getNumJoints(self.robot_id, physicsClientId=self.physics_client)):
+        #     joint_info = p.getJointInfo(self.robot_id, i, physicsClientId=self.physics_client) ///////////////////////////////////////////////////////
+        #     joint_name = joint_info[1].decode('utf-8')
+            
+        #     if joint_name == 'joint_5':
+        #         p.resetJointState(
+        #             self.robot_id, i,
+        #             self.home_gripper_position,
+        #             physicsClientId=self.physics_client
+        #         )
+        #         break
         # 生成新的目标位置
         self.target_position = self._sample_target_position()
+         # ✅ 新增：记录初始目标位置（用于漂移限制）
+        self.initial_target_position = self.target_position.copy()
+        
+        # ✅ 新增：重置目标速度
+        self.target_velocity = np.zeros(3, dtype=np.float32)
 
         # 重置水流
         self.current_velocity_actual = self.current_velocity.copy()
@@ -590,7 +773,23 @@ class AlphaReachEnv(gym.Env):
             'target_position': self.target_position.copy(),
             'initial_distance': self.previous_distance
         }
-
+         # ✅ 新增：验证夹爪位置
+        for i in range(p.getNumJoints(self.robot_id, physicsClientId=self.physics_client)):
+            joint_info = p.getJointInfo(self.robot_id, i, physicsClientId=self.physics_client)
+            joint_name = joint_info[1].decode('utf-8')
+            
+            if joint_name == 'joint_5':
+                p.resetJointState(
+                    self.robot_id, i,
+                    self.home_gripper_position,
+                    physicsClientId=self.physics_client
+                )
+                
+                # 验证是否设置成功
+                joint_state = p.getJointState(self.robot_id, i, physicsClientId=self.physics_client)
+                actual_position = joint_state[0]
+                print(f"✅ 夹爪reset到: {actual_position:.4f} (目标: {self.home_gripper_position:.4f})")
+                break
         return observation, info  # 从 return observation 改为 return observation, info
     
     def step(self, action):
@@ -609,7 +808,12 @@ class AlphaReachEnv(gym.Env):
         # 运行物理仿真 (减少步数提高响应性)
         for _ in range(4):
             p.stepSimulation(physicsClientId=self.physics_client)
+        # ✅ 新增：更新目标位置（放在物理仿真后）
+        self._update_target_position(dt=4./240.)  # dt = 仿真步数 * 时间步长
         
+        # ✅ 新增：更新目标视觉标记
+        self._update_target_visual()
+
         # 获取新的观察
         observation = self._get_observation()
 
@@ -623,13 +827,21 @@ class AlphaReachEnv(gym.Env):
         # 计算当前距离
         ee_pos = self._get_end_effector_position()
         current_distance = float(np.linalg.norm(ee_pos - self.target_position))
-        
+        # 计算当前漂移距离（调试用）
+        if hasattr(self, 'initial_target_position'):
+            current_drift = float(np.linalg.norm(
+                self.target_position - self.initial_target_position
+            ))
+        else:
+            current_drift = 0.0
         info = {
             'success': success,
             'distance': current_distance,
             'is_success': success,
             'current_velocity': self.current_velocity_actual.copy(),
-            'underwater': True
+            'underwater': True,
+            'target_drift': current_drift,  # ✅ 新增：目标漂移距离
+            'target_velocity': self.target_velocity.copy()  # ✅ 新增：目标速度
         }
 
         info.update(reward_terms)
@@ -650,31 +862,34 @@ class AlphaReachEnv(gym.Env):
         """渲染水下环境"""
         pass
 
-# 测试水下环境
 if __name__ == "__main__":
-    # 创建水下环境
     env = AlphaReachEnv(render_mode="human")
+    obs, info = env.reset()
     
-    print("水下环境测试开始...")
+    print(f"初始目标位置: {info['target_position']}")
+    print(f"最大漂移限制: {env.max_target_drift * 100:.1f}cm")
     
-    # 重置环境
-    obs = env.reset()
-    print(f"初始观察维度: {obs.shape}")
+    max_drift_observed = 0.0
     
-    # 运行测试
     for step in range(200):
-        # 随机动作 (幅度较小适应水下环境)
         action = env.action_space.sample()
-
-        obs, reward, done, info = env.step(action)
+        obs, reward, terminated, truncated, info = env.step(action)
+        done = terminated or truncated
+        
+        # 记录最大漂移
+        if 'target_drift' in info:
+            max_drift_observed = max(max_drift_observed, info['target_drift'])
         
         if step % 20 == 0:
-            print(f"步数 {step}: 奖励={reward:.3f}, 距离={info['distance']:.3f}m, "
-                  f"成功={info['success']}, 水流={np.linalg.norm(info['current_velocity']):.3f}")
+            drift_cm = info.get('target_drift', 0) * 100
+            print(f"步数 {step}: 距离={info['distance']:.3f}m, "
+                  f"目标漂移={drift_cm:.2f}cm")
         
         if done:
-            print(f"回合结束: 成功={info['success']}, 最终距离={info['distance']:.3f}m")
-            obs = env.reset()
+            print(f"\n回合结束:")
+            print(f"  最大漂移: {max_drift_observed * 100:.2f}cm")
+            print(f"  成功: {info['success']}")
+            obs, info = env.reset()
+            max_drift_observed = 0.0
     
     env.close()
-    print("水下环境测试完成")

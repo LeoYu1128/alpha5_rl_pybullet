@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 import pybullet as p
 from PIL import Image
 from pathlib import Path
-
+from monitor_callbacks import ComprehensiveMonitor
 from stable_baselines3 import SAC, PPO, TD3
 from stable_baselines3.common.vec_env import DummyVecEnv, VecNormalize
 from stable_baselines3.common.evaluation import evaluate_policy
@@ -27,8 +27,8 @@ from stable_baselines3.common.env_checker import check_env
 import time
 
 # 导入环境
-from envs.rl_env_v5_success import AlphaReachEnv
-
+# from envs.rl_env_v5_success import AlphaReachEnv
+from envs.rl_env_v9 import AlphaReachEnv
 def create_experiment_folder(algorithm, timesteps):
     """创建实验文件夹"""
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -881,10 +881,15 @@ def train_alpha_reach(
     # 开始训练
     print("开始训练...")
     start_time = time.time()
-    
+     # ✅ 创建综合监控callback
+    comprehensive_monitor = ComprehensiveMonitor(
+        log_dir=log_path,
+        verbose=1,
+        window_size=100
+    )
     model.learn(
         total_timesteps=total_timesteps,
-        callback=[eval_callback, checkpoint_callback, progress_callback],
+        callback=[eval_callback, checkpoint_callback, progress_callback, comprehensive_monitor],
         progress_bar=True
     )
     
