@@ -474,22 +474,4 @@ class CurriculumMonitorCallback(BaseCallback):
             json.dump(history, f, indent=2)
 ```
 
-## 📝 Citation
-
-If you use this code in your research, please cite:
-
-```bibtex
-@software{underwater_alpha_arm,
-  title = {Underwater Alpha Robotic Arm RL Training System},
-  year = {2024},
-  description = {Deep reinforcement learning for underwater robotic manipulation}
-}
-```
-
-## 📄 License
-
-This project is provided for research and educational purposes.
-
----
-
 For questions or issues, please open an issue on the repository.
