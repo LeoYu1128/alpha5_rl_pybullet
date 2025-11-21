@@ -1,3 +1,5 @@
+python run_comparison.py
+
 # Underwater Alpha Robotic Arm - Deep Reinforcement Learning Training System
 
 A comprehensive reinforcement learning training framework for underwater robotic arm reaching tasks using PyBullet simulation. This system supports multiple state-of-the-art RL algorithms with progressive curriculum learning, domain randomization, and publication-quality evaluation tools.
