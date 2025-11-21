@@ -1,0 +1,101 @@
+================================================================================
+Deep Reinforcement Learning Algorithm Comparison Report
+Underwater Robotic Arm Reaching Task
+================================================================================
+
+Experiment Configuration:
+  Training Stage: stage4
+  Training Steps: 600,000
+  Compared Algorithms: SAC, TQC, CrossQ
+  Experiment Time: 2025-11-15 05:37:59
+
+================================================================================
+
+SAC Performance Report:
+--------------------------------------------------------------------------------
+
+1. Training Performance:
+   Training Time: 4.43 hours
+   Final Reward (last 100 eps): -0.01 ± 89.28
+   Best Reward: 755.06
+   Reward CV: 0.0000
+
+2. Convergence Performance:
+   Convergence Steps: 75,427
+   Convergence Episodes: 176
+   Sample Efficiency: 75,427 steps
+
+3. Evaluation Performance (50 episodes):
+   Success Rate: 48.0%
+   Mean Distance: 8.38 ± 5.07 cm
+   Mean Reward: 6.77 ± 103.33
+   Mean Episode Length: 348.6 ± 177.8
+
+================================================================================
+
+TQC Performance Report:
+--------------------------------------------------------------------------------
+
+1. Training Performance:
+   Training Time: 5.45 hours
+   Final Reward (last 100 eps): 81.56 ± 145.18
+   Best Reward: 1237.61
+   Reward CV: 1.7802
+
+2. Convergence Performance:
+   Convergence Steps: 75
+   Convergence Episodes: 0
+   Sample Efficiency: 75 steps
+
+3. Evaluation Performance (50 episodes):
+   Success Rate: 60.0%
+   Mean Distance: 6.27 ± 4.13 cm
+   Mean Reward: 154.66 ± 285.49
+   Mean Episode Length: 302.2 ± 183.7
+
+================================================================================
+
+CrossQ Performance Report:
+--------------------------------------------------------------------------------
+
+1. Training Performance:
+   Training Time: 6.29 hours
+   Final Reward (last 100 eps): 61.50 ± 97.88
+   Best Reward: 986.06
+   Reward CV: 1.5916
+
+2. Convergence Performance:
+   Convergence Steps: 26,512
+   Convergence Episodes: 94
+   Sample Efficiency: 26,512 steps
+
+3. Evaluation Performance (50 episodes):
+   Success Rate: 94.0%
+   Mean Distance: 4.41 ± 0.66 cm
+   Mean Reward: 45.21 ± 49.57
+   Mean Episode Length: 135.2 ± 104.6
+
+================================================================================
+
+Algorithm Rankings:
+================================================================================
+
+By Success Rate:
+  1. CrossQ: 94.0%
+  2. TQC: 60.0%
+  3. SAC: 48.0%
+
+By Mean Final Distance (Precision):
+  1. CrossQ: 4.41cm
+  2. TQC: 6.27cm
+  3. SAC: 8.38cm
+
+By Sample Efficiency (Convergence Speed):
+  1. TQC: 75 steps
+  2. CrossQ: 26,512 steps
+  3. SAC: 75,427 steps
+
+By Training Stability (CV, lower is better):
+  1. SAC: 0.0000
+  2. CrossQ: 1.5916
+  3. TQC: 1.7802

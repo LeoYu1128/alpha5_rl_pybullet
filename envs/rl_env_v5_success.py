@@ -7,7 +7,7 @@ import numpy as np
 import gymnasium as gym
 from gymnasium import spaces
 import math
-from envs.test_joint5 import GripperController
+# from envs.test_joint5 import GripperController  # ✅ 注释掉避免导入错误
 
 class AlphaReachEnv(gym.Env):
     """
@@ -21,7 +21,9 @@ class AlphaReachEnv(gym.Env):
     3. reset时使用URDF home位置初始化
     """
     
-    def __init__(self, render_mode=None, max_steps=500, reward_type='dense'):
+    def __init__(self, render_mode=None, max_steps=500, reward_type='dense',
+                 enable_target_drift=None, enable_domain_randomization=None, enable_curriculum=None):
+        # ✅ train_v8兼容性: 接受但忽略这些参数 (v5环境不支持这些功能)
         super().__init__()
 
         self.render_mode = render_mode
@@ -102,7 +104,7 @@ class AlphaReachEnv(gym.Env):
         self.velocity_penalty = 0.02
         self.time_penalty = 0.005
         self.success_bonus = 5.0
-        self.success_threshold = 0.005
+        self.success_threshold = 0.05
         self.previous_distance = None
 
         # 动作空间: 4个关节 + 1个夹爪
@@ -421,23 +423,23 @@ class AlphaReachEnv(gym.Env):
                 except:
                     pass
         
-        # 4. 关节阻尼
-        for joint_idx in self.main_joint_indices:
-            try:
-                joint_state = p.getJointState(self.robot_id, joint_idx,
-                                             physicsClientId=self.physics_client)
-                joint_velocity = joint_state[1]
+        # # 4. 关节阻尼
+        # for joint_idx in self.main_joint_indices:
+        #     try:
+        #         joint_state = p.getJointState(self.robot_id, joint_idx,
+        #                                      physicsClientId=self.physics_client)
+        #         joint_velocity = joint_state[1]
                 
-                if abs(joint_velocity) > 0.05:
-                    damping_torque = -0.15 * joint_velocity * abs(joint_velocity)
-                else:
-                    damping_torque = -0.1 * joint_velocity
+        #         if abs(joint_velocity) > 0.05:
+        #             damping_torque = -0.15 * joint_velocity * abs(joint_velocity)
+        #         else:
+        #             damping_torque = -0.1 * joint_velocity
                 
-                damping_torque = np.clip(damping_torque, -2.0, 2.0)
-                p.setJointMotorControl2(self.robot_id, joint_idx, p.TORQUE_CONTROL,
-                                       force=damping_torque, physicsClientId=self.physics_client)
-            except:
-                pass
+        #         damping_torque = np.clip(damping_torque, -2.0, 2.0)
+        #         p.setJointMotorControl2(self.robot_id, joint_idx, p.TORQUE_CONTROL,
+        #                                force=damping_torque, physicsClientId=self.physics_client)
+        #     except:
+        #         pass
     
     def _sample_target_position(self):
         """采样目标位置"""
@@ -504,34 +506,79 @@ class AlphaReachEnv(gym.Env):
                                     physicsClientId=self.physics_client)
         return np.array(link_state[0], dtype=np.float32)
     
+    # def _apply_action(self, action):
+    #     """应用动作"""
+    #     current_positions = self._get_joint_positions()
+        
+    #     arm_action = action[:4]
+    #     gripper_action = action[4]
+        
+    #     scaled_action = arm_action * 0.15
+    #     target_positions = current_positions + scaled_action
+        
+    #     for i, joint_idx in enumerate(self.main_joint_indices):
+    #         joint = self.joint_info[joint_idx]
+    #         target_positions[i] = np.clip(target_positions[i], joint['lower'], joint['upper'])
+        
+    #     control_torque = 9.0 * 3.0  # 27 Nm
+        
+    #     for i, joint_idx in enumerate(self.main_joint_indices):
+    #         p.setJointMotorControl2(
+    #             self.robot_id, joint_idx, p.POSITION_CONTROL,
+    #             targetPosition=target_positions[i],
+    #             maxVelocity=0.5,
+    #             force=control_torque,
+    #             physicsClientId=self.physics_client
+    #         )
+        
+    #     if self.gripper is not None:
+    #         self.gripper.control(gripper_action)
+    
     def _apply_action(self, action):
-        """应用动作"""
+        """应用动作 - 修复版"""
         current_positions = self._get_joint_positions()
         
         arm_action = action[:4]
         gripper_action = action[4]
         
-        scaled_action = arm_action * 0.15
+        # ✅ 修复1: 自适应动作缩放
+        ee_pos = self._get_end_effector_position()
+        current_distance = np.linalg.norm(ee_pos - self.target_position)
+        
+        if current_distance > 0.15:
+            scale = 0.3      # 远距离用大步长
+        elif current_distance > 0.08:
+            scale = 0.15     # 中距离用中步长  
+        else:
+            scale = 0.08     # 近距离用小步长
+        
+        scaled_action = arm_action * scale
         target_positions = current_positions + scaled_action
         
+        # 限制到关节范围
         for i, joint_idx in enumerate(self.main_joint_indices):
             joint = self.joint_info[joint_idx]
-            target_positions[i] = np.clip(target_positions[i], joint['lower'], joint['upper'])
+            target_positions[i] = np.clip(
+                target_positions[i], 
+                joint['lower'], 
+                joint['upper']
+            )
         
-        control_torque = 9.0 * 3.0  # 27 Nm
+        # ✅ 修复2: 不同关节使用不同力矩 (关键!)
+        control_torques = [600.0, 300.0, 200.0, 160.0]
         
         for i, joint_idx in enumerate(self.main_joint_indices):
             p.setJointMotorControl2(
                 self.robot_id, joint_idx, p.POSITION_CONTROL,
                 targetPosition=target_positions[i],
-                maxVelocity=0.5,
-                force=control_torque,
+                maxVelocity=2.0,              # ✅ 修复3: 提高最大速度
+                force=control_torques[i],     # ✅ 使用分级力矩
                 physicsClientId=self.physics_client
             )
         
         if self.gripper is not None:
             self.gripper.control(gripper_action)
-    
+
     def _compute_reward(self, action):
         """计算奖励"""
         achieved_goal = self._get_end_effector_position()

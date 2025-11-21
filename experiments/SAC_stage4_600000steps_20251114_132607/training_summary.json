@@ -1,0 +1,10 @@
+{
+  "algorithm": "SAC",
+  "stage": "stage4",
+  "stage_description": "\u8bfe\u7a0b\u5b66\u4e60 - \u6700\u7ec8\u7248",
+  "total_timesteps": 600000,
+  "training_time_hours": 4.366336278650496,
+  "final_mean_reward": 12.7476778,
+  "final_std_reward": 103.80169701155639,
+  "model_path": "experiments\\SAC_stage4_600000steps_20251114_132607\\models\\SAC_final"
+}

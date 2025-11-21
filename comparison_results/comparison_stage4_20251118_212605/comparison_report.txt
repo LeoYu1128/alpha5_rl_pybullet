@@ -1,0 +1,248 @@
+================================================================================
+Deep Reinforcement Learning Algorithm Comparison Report
+Underwater Robotic Arm Reaching Task
+================================================================================
+
+Experiment Configuration:
+  Training Stage: stage4
+  Training Steps: 600,000
+  Compared Algorithms: SAC, TQC, CrossQ
+  Experiment Time: 2025-11-19 09:59:10
+
+================================================================================
+
+SAC Performance Report:
+--------------------------------------------------------------------------------
+
+1. Training Performance:
+   Training Time: 3.99 hours
+   Final Reward (last 100 eps): -18.09 ± 129.10
+   Best Reward: 811.69
+   Reward CV: 7.1350
+
+2. Convergence Performance:
+   Convergence Steps: 50,238
+   Convergence Episodes: 114
+   Sample Efficiency: 50,238 steps
+
+3. Evaluation Performance (50 episodes):
+   Success Rate: 60.0%
+   Mean Distance: 7.26 ± 4.97 cm
+   Mean Reward: 27.94 ± 95.07
+   Mean Episode Length: 295.0 ± 189.1
+
+================================================================================
+
+TQC Performance Report:
+--------------------------------------------------------------------------------
+
+1. Training Performance:
+   Training Time: 3.71 hours
+   Final Reward (last 100 eps): 109.95 ± 201.55
+   Best Reward: 1162.71
+   Reward CV: 1.8332
+
+2. Convergence Performance:
+   Convergence Steps: 59,002
+   Convergence Episodes: 195
+   Sample Efficiency: 59,002 steps
+
+3. Evaluation Performance (50 episodes):
+   Success Rate: 64.0%
+   Mean Distance: 6.09 ± 4.27 cm
+   Mean Reward: 119.58 ± 222.58
+   Mean Episode Length: 282.1 ± 181.6
+
+================================================================================
+
+CrossQ Performance Report:
+--------------------------------------------------------------------------------
+
+1. Training Performance:
+   Training Time: 4.83 hours
+   Final Reward (last 100 eps): 53.75 ± 89.43
+   Best Reward: 147856.00
+   Reward CV: 1.6638
+
+2. Convergence Performance:
+   Convergence Steps: 26,931
+   Convergence Episodes: 87
+   Sample Efficiency: 26,931 steps
+
+3. Evaluation Performance (50 episodes):
+   Success Rate: 86.0%
+   Mean Distance: 4.56 ± 1.32 cm
+   Mean Reward: 45.57 ± 57.95
+   Mean Episode Length: 162.8 ± 149.1
+
+================================================================================
+
+Algorithm Rankings:
+================================================================================
+
+By Success Rate:
+  1. CrossQ: 86.0%
+  2. TQC: 64.0%
+  3. SAC: 60.0%
+
+By Mean Final Distance (Precision):
+  1. CrossQ: 4.56cm
+  2. TQC: 6.09cm
+  3. SAC: 7.26cm
+
+By Sample Efficiency (Convergence Speed):
+  1. CrossQ: 26,931 steps
+  2. SAC: 50,238 steps
+  3. TQC: 59,002 steps
+
+By Training Stability (CV, lower is better):
+  1. CrossQ: 1.6638
+  2. TQC: 1.8332
+  3. SAC: 7.1350
+
+================================================================================
+Curriculum Learning Progression
+================================================================================
+
+
+SAC:
+--------------------------------------------------------------------------------
+  Total Episodes: 1487
+  Total Successes: 448
+  Overall Success Rate: 30.1%
+  Total Stage Transitions: 1
+  Final Stage Reached: 0
+
+  Episodes per Stage:
+    Stage 0: 1487 episodes
+
+  Stage Transition Timeline:
+
+    Transition 1: Stage None → Stage 0
+      Timestep: 1
+      Episode: 0
+      Episodes in previous stage: 0
+      Drift strength: 0.025 m/s
+      Success threshold: 4.0 cm
+
+TQC:
+--------------------------------------------------------------------------------
+  Total Episodes: 2113
+  Total Successes: 1394
+  Overall Success Rate: 66.0%
+  Total Stage Transitions: 6
+  Final Stage Reached: 5
+
+  Episodes per Stage:
+    Stage 0: 899 episodes
+    Stage 1: 50 episodes
+    Stage 2: 50 episodes
+    Stage 3: 50 episodes
+    Stage 4: 50 episodes
+    Stage 5: 1014 episodes
+
+  Stage Transition Timeline:
+
+    Transition 1: Stage None → Stage 0
+      Timestep: 1
+      Episode: 0
+      Episodes in previous stage: 0
+      Drift strength: 0.025 m/s
+      Success threshold: 4.0 cm
+
+    Transition 2: Stage 0 → Stage 1
+      Timestep: 291,661
+      Episode: 899
+      Episodes in previous stage: 899
+      Drift strength: 0.035 m/s
+      Success threshold: 4.0 cm
+
+    Transition 3: Stage 1 → Stage 2
+      Timestep: 304,992
+      Episode: 949
+      Episodes in previous stage: 50
+      Drift strength: 0.046 m/s
+      Success threshold: 4.0 cm
+
+    Transition 4: Stage 2 → Stage 3
+      Timestep: 318,004
+      Episode: 999
+      Episodes in previous stage: 50
+      Drift strength: 0.056 m/s
+      Success threshold: 4.0 cm
+
+    Transition 5: Stage 3 → Stage 4
+      Timestep: 329,629
+      Episode: 1049
+      Episodes in previous stage: 50
+      Drift strength: 0.066 m/s
+      Success threshold: 4.0 cm
+
+    Transition 6: Stage 4 → Stage 5
+      Timestep: 340,951
+      Episode: 1099
+      Episodes in previous stage: 50
+      Drift strength: 0.076 m/s
+      Success threshold: 4.0 cm
+
+CrossQ:
+--------------------------------------------------------------------------------
+  Total Episodes: 2920
+  Total Successes: 2340
+  Overall Success Rate: 80.1%
+  Total Stage Transitions: 6
+  Final Stage Reached: 5
+
+  Episodes per Stage:
+    Stage 0: 499 episodes
+    Stage 1: 100 episodes
+    Stage 2: 50 episodes
+    Stage 3: 50 episodes
+    Stage 4: 50 episodes
+    Stage 5: 2171 episodes
+
+  Stage Transition Timeline:
+
+    Transition 1: Stage None → Stage 0
+      Timestep: 1
+      Episode: 0
+      Episodes in previous stage: 0
+      Drift strength: 0.025 m/s
+      Success threshold: 4.0 cm
+
+    Transition 2: Stage 0 → Stage 1
+      Timestep: 185,486
+      Episode: 499
+      Episodes in previous stage: 499
+      Drift strength: 0.035 m/s
+      Success threshold: 4.0 cm
+
+    Transition 3: Stage 1 → Stage 2
+      Timestep: 209,421
+      Episode: 599
+      Episodes in previous stage: 100
+      Drift strength: 0.046 m/s
+      Success threshold: 4.0 cm
+
+    Transition 4: Stage 2 → Stage 3
+      Timestep: 219,924
+      Episode: 649
+      Episodes in previous stage: 50
+      Drift strength: 0.056 m/s
+      Success threshold: 4.0 cm
+
+    Transition 5: Stage 3 → Stage 4
+      Timestep: 229,913
+      Episode: 699
+      Episodes in previous stage: 50
+      Drift strength: 0.066 m/s
+      Success threshold: 4.0 cm
+
+    Transition 6: Stage 4 → Stage 5
+      Timestep: 238,012
+      Episode: 749
+      Episodes in previous stage: 50
+      Drift strength: 0.076 m/s
+      Success threshold: 4.0 cm
+
+================================================================================

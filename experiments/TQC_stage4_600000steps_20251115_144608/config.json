@@ -1,0 +1,35 @@
+{
+  "algorithm": "TQC",
+  "timesteps": 600000,
+  "timestamp": "2025-11-15T14:46:10.034755",
+  "config": {
+    "policy": "MlpPolicy",
+    "device": "cuda",
+    "learning_rate": 0.0003,
+    "buffer_size": 500000,
+    "batch_size": 256,
+    "tau": 0.005,
+    "gamma": 0.99,
+    "train_freq": 1,
+    "gradient_steps": 1,
+    "learning_starts": 10000,
+    "top_quantiles_to_drop_per_net": 2,
+    "policy_kwargs": {
+      "net_arch": [
+        256,
+        256
+      ],
+      "n_critics": 2,
+      "n_quantiles": 25
+    },
+    "verbose": 1
+  },
+  "stage_config": {
+    "enable_target_drift": true,
+    "enable_domain_randomization": true,
+    "enable_curriculum": true,
+    "enable_sensor_noise": true,
+    "description": "\u8bfe\u7a0b\u5b66\u4e60 - \u6700\u7ec8\u7248",
+    "recommended_timesteps": 1000000
+  }
+}

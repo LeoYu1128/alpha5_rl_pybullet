@@ -1,0 +1,10 @@
+{
+  "algorithm": "CrossQ",
+  "stage": "stage2",
+  "stage_description": "\u57df\u968f\u673a\u5316 - \u66f4\u9c81\u68d2",
+  "total_timesteps": 200000,
+  "training_time_hours": 1.9737710822953118,
+  "final_mean_reward": 118.0881032,
+  "final_std_reward": 212.64818753986705,
+  "model_path": "experiments\\CrossQ_stage2_200000steps_20251113_153354\\models\\CrossQ_final"
+}

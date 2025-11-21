@@ -1,0 +1,10 @@
+{
+  "algorithm": "TQC",
+  "stage": "stage4",
+  "stage_description": "\u8bfe\u7a0b\u5b66\u4e60 - \u6700\u7ec8\u7248",
+  "total_timesteps": 600000,
+  "training_time_hours": 3.634344128568967,
+  "final_mean_reward": 111.43098590000002,
+  "final_std_reward": 206.59020164654737,
+  "model_path": "experiments\\TQC_stage4_600000steps_20251119_012603\\models\\TQC_final"
+}

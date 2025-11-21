@@ -1,0 +1,40 @@
+{
+  "algorithm": "SAC",
+  "timesteps": 600000,
+  "timestamp": "2025-11-15T10:31:37.081676",
+  "config": {
+    "policy": "MlpPolicy",
+    "device": "cuda",
+    "learning_rate": 0.0003,
+    "buffer_size": 500000,
+    "batch_size": 512,
+    "tau": 0.005,
+    "gamma": 0.98,
+    "train_freq": [
+      64,
+      "step"
+    ],
+    "gradient_steps": 64,
+    "learning_starts": 10000,
+    "ent_coef": "auto",
+    "target_update_interval": 1,
+    "use_sde": false,
+    "sde_sample_freq": 4,
+    "policy_kwargs": {
+      "net_arch": [
+        256,
+        256,
+        256
+      ]
+    },
+    "verbose": 1
+  },
+  "stage_config": {
+    "enable_target_drift": true,
+    "enable_domain_randomization": true,
+    "enable_curriculum": true,
+    "enable_sensor_noise": true,
+    "description": "\u8bfe\u7a0b\u5b66\u4e60 - \u6700\u7ec8\u7248",
+    "recommended_timesteps": 1000000
+  }
+}

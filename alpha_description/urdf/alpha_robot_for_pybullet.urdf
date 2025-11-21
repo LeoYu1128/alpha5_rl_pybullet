@@ -17,9 +17,10 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="alpha_black"/>
     </visual>
+    
     <collision>
       <geometry>
-        <cylinder length="0.150" radius="0.05"/>
+        <cylinder length="0.150" radius="0.03"/>
       </geometry>
       <origin rpy="0 1.57075 0" xyz="-0.055 0 0"/>
     </collision>
@@ -45,9 +46,10 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="alpha_black"/>
     </visual>
+    
     <collision>
       <geometry>
-        <cylinder length="0.150" radius="0.05"/>
+        <cylinder length="0.150" radius="0.03"/>
       </geometry>
       <origin rpy="0 1.57075 0" xyz="-0.055 0 0"/>
     </collision>
@@ -74,9 +76,10 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="alpha_black"/>
     </visual>
+    
     <collision>
       <geometry>
-        <cylinder length="0.033" radius="0.05"/>
+        <cylinder length="0.033" radius="0.03"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.0165"/>
     </collision>
@@ -106,9 +109,10 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="alpha_black"/>
     </visual>
+    
     <collision>
       <geometry>
-        <cylinder length="0.145" radius="0.05"/>
+        <cylinder length="0.145" radius="0.03"/>
       </geometry>
       <origin rpy="0 0 0" xyz="-0.02 0 -0.0725"/>
     </collision>
@@ -122,22 +126,22 @@
 
     <collision>
       <geometry>
-        <cylinder length="0.040" radius="0.05"/>
+        <cylinder length="0.040" radius="0.03"/>
       </geometry>
       <origin rpy="1.5707 0 0" xyz="-0.040 0 -0.1453"/>
     </collision>
-    <!-- 顶部球体 -->
+    
+    
     <collision>
       <geometry>
-        <sphere radius="0.05"/>
+        <sphere radius="0.032"/>
       </geometry>
       <origin xyz="0 0 0"/>
     </collision>
 
-    <!-- 底部球体 -->
     <collision>
       <geometry>
-        <sphere radius="0.05"/>
+        <sphere radius="0.032"/>
       </geometry>
       <origin xyz="-0.040 0 -0.1453"/>
     </collision>
@@ -154,7 +158,7 @@
     <child link="m2_link"/>
     <origin xyz="-0.02 0 0.033" rpy="0 1.745 0"/>
     <axis xyz="0 1 0"/>
-    <limit effort="9.0" lower="-1.745" upper="1.745" velocity="0.698"/>
+    <limit effort="9.0" lower="0" upper="3.0" velocity="0.698"/>
     <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
@@ -224,12 +228,6 @@
 
   <!-- End effector base link -->
   <link name="ee_base_link">
-    <!-- <collision>
-      <geometry>
-        <cylinder length="0.01" radius="0.01"/>
-      </geometry>
-      <origin xyz="0 0 0.006"/>
-    </collision> -->
     <inertial>
       <mass value="0.05"/>
       <origin xyz="0 0 0.005"/>

@@ -1,0 +1,118 @@
+================================================================================
+Curriculum Learning Progression Report
+================================================================================
+
+Generated: 2025-11-19 10:58:57
+
+SAC: No curriculum data
+
+TQC:
+--------------------------------------------------------------------------------
+  Total Episodes: 2113
+  Total Successes: 1394
+  Overall Success Rate: 66.0%
+  Total Stage Transitions: 6
+  Final Stage: 5
+
+  Episodes per Stage:
+    Stage 0: 899 episodes
+    Stage 1: 50 episodes
+    Stage 2: 50 episodes
+    Stage 3: 50 episodes
+    Stage 4: 50 episodes
+    Stage 5: 1014 episodes
+
+  Stage Transition Timeline:
+
+    Transition 1: Stage 0 → 1
+      Timestep: 291,661
+      Episode: 899
+      Episodes in previous stage: 899
+      Drift strength: 0.035 m/s
+      Success threshold: 4.0 cm
+
+    Transition 2: Stage 1 → 2
+      Timestep: 304,992
+      Episode: 949
+      Episodes in previous stage: 50
+      Drift strength: 0.046 m/s
+      Success threshold: 4.0 cm
+
+    Transition 3: Stage 2 → 3
+      Timestep: 318,004
+      Episode: 999
+      Episodes in previous stage: 50
+      Drift strength: 0.056 m/s
+      Success threshold: 4.0 cm
+
+    Transition 4: Stage 3 → 4
+      Timestep: 329,629
+      Episode: 1049
+      Episodes in previous stage: 50
+      Drift strength: 0.066 m/s
+      Success threshold: 4.0 cm
+
+    Transition 5: Stage 4 → 5
+      Timestep: 340,951
+      Episode: 1099
+      Episodes in previous stage: 50
+      Drift strength: 0.076 m/s
+      Success threshold: 4.0 cm
+
+================================================================================
+
+CrossQ:
+--------------------------------------------------------------------------------
+  Total Episodes: 2920
+  Total Successes: 2340
+  Overall Success Rate: 80.1%
+  Total Stage Transitions: 6
+  Final Stage: 5
+
+  Episodes per Stage:
+    Stage 0: 499 episodes
+    Stage 1: 100 episodes
+    Stage 2: 50 episodes
+    Stage 3: 50 episodes
+    Stage 4: 50 episodes
+    Stage 5: 2171 episodes
+
+  Stage Transition Timeline:
+
+    Transition 1: Stage 0 → 1
+      Timestep: 185,486
+      Episode: 499
+      Episodes in previous stage: 499
+      Drift strength: 0.035 m/s
+      Success threshold: 4.0 cm
+
+    Transition 2: Stage 1 → 2
+      Timestep: 209,421
+      Episode: 599
+      Episodes in previous stage: 100
+      Drift strength: 0.046 m/s
+      Success threshold: 4.0 cm
+
+    Transition 3: Stage 2 → 3
+      Timestep: 219,924
+      Episode: 649
+      Episodes in previous stage: 50
+      Drift strength: 0.056 m/s
+      Success threshold: 4.0 cm
+
+    Transition 4: Stage 3 → 4
+      Timestep: 229,913
+      Episode: 699
+      Episodes in previous stage: 50
+      Drift strength: 0.066 m/s
+      Success threshold: 4.0 cm
+
+    Transition 5: Stage 4 → 5
+      Timestep: 238,012
+      Episode: 749
+      Episodes in previous stage: 50
+      Drift strength: 0.076 m/s
+      Success threshold: 4.0 cm
+
+================================================================================
+

@@ -46,13 +46,13 @@ class UnderwaterManualControl:
         # URDF中的home位置（PyBullet中的角度）
         self.urdf_home_positions = [
             np.radians(2.34),
-            np.radians(0),      # URDF中joint_2=0时直立
+            np.radians(87.8),      # URDF中joint_2=0时直立
             np.radians(1.0),
             np.radians(0.1)
         ]
         
         # 角度偏移（真实->URDF需要减去这个值）
-        self.angle_offset = np.array([0, np.radians(87.8), 0, 0])
+        self.angle_offset = np.array([0, np.radians(0.0), 0, 0])
         
         # Gripper home位置
         self.home_gripper_position = 0.0014  # 1.4mm
@@ -172,9 +172,9 @@ class UnderwaterManualControl:
     def _load_alpha_robot(self):
         """Load Alpha robotic arm"""
         robot_paths = [
-            "alpha_description/urdf/alpha_robot_for_pybullet_test.urdf",
-            "alpha_robot_for_pybullet_test.urdf",
-            "../alpha_description/urdf/alpha_robot_for_pybullet_test.urdf",
+            "alpha_description/urdf/alpha_robot_for_pybullet.urdf",
+            "alpha_robot_for_pybullet.urdf",
+            "../alpha_description/urdf/alpha_robot_for_pybullet.urdf",
         ]
         
         print("Searching for robot URDF...")
@@ -438,7 +438,7 @@ class UnderwaterManualControl:
                     p.POSITION_CONTROL,
                     targetPosition=target_positions[i], 
                     maxVelocity=max_vel,
-                    force=500
+                    force=9.0
                 )
             
     def _get_end_effector_position(self):
@@ -492,7 +492,7 @@ class UnderwaterManualControl:
         # 关节配置（name, lower, upper, real_home_deg）
         joint_configs = [
             ("Base (joint_1)", 0, 5.725, 2.34),
-            ("Shoulder (joint_2)", -1.745, 1.745, 87.8),
+            ("Shoulder (joint_2)", 0, 3.0, 87.8),
             ("Elbow (joint_3)", 0, 3.228, 1.0),
             ("Wrist (joint_4)", 0, 5.725, 0.1)
         ]
