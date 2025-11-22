@@ -4,3 +4,4 @@ __pycache__/
 .DS_Store
 IsaacLab/
 logs/
+stage4_test_results/
